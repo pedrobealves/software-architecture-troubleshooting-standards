@@ -4,5 +4,5 @@ import br.edu.utfpr.troubleshootingstandards.model.Lecturer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LecturerRepository extends JpaRepository<Lecturer, Long> {
-    public Lecturer findLecturerBy(String code);
+    Lecturer findByCode(String code);
 }
