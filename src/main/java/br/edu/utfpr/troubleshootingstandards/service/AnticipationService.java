@@ -1,7 +1,7 @@
-package br.edu.utfpr.service;
+package br.edu.utfpr.troubleshootingstandards.service;
 
-import br.edu.utfpr.dto.AnticipationDTO;
-import br.edu.utfpr.exception.ExceededAntecipationClassException;
+import br.edu.utfpr.troubleshootingstandards.dto.AnticipationDTO;
+import br.edu.utfpr.troubleshootingstandards.exception.ExceededAntecipationClassException;
 import org.springframework.stereotype.Service;
 
 @Service

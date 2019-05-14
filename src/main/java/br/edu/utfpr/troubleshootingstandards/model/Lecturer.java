@@ -1,4 +1,4 @@
-package br.edu.utfpr.model;
+package br.edu.utfpr.troubleshootingstandards.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

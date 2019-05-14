@@ -1,8 +1,8 @@
-package br.edu.utfpr.repository;
+package br.edu.utfpr.troubleshootingstandards.repository;
 
-import br.edu.utfpr.model.Lecturer;
+import br.edu.utfpr.troubleshootingstandards.model.Lecturer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LecturerRepository extends JpaRepository<Lecturer, Long> {
-    Lecturer findLecturerBy(String code);
+    public Lecturer findLecturerBy(String code);
 }
