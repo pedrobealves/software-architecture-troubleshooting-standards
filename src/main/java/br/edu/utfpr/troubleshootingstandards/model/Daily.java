@@ -1,6 +1,6 @@
-package br.edu.utfpr.model;
+package br.edu.utfpr.troubleshootingstandards.model;
 
-import br.edu.utfpr.dto.AnticipationDTO;
+import br.edu.utfpr.troubleshootingstandards.dto.AnticipationDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,7 +24,7 @@ public class Daily implements Serializable {
     private Long id;
 
     @OneToOne
-    private AnticipationDTO anticipation;
+    private Anticipation anticipation;
 
     private String content;
 

@@ -1,12 +1,12 @@
-package br.edu.utfpr.service;
+package br.edu.utfpr.troubleshootingstandards.service;
 
-import br.edu.utfpr.dto.AnticipationDTO;
-import br.edu.utfpr.exception.ExceededAntecipationClassException;
-import br.edu.utfpr.model.Anticipation;
-import br.edu.utfpr.model.Lecturer;
-import br.edu.utfpr.model.Modalities;
-import br.edu.utfpr.repository.AnticipationRepository;
-import br.edu.utfpr.repository.LecturerRepository;
+import br.edu.utfpr.troubleshootingstandards.dto.AnticipationDTO;
+import br.edu.utfpr.troubleshootingstandards.exception.ExceededAntecipationClassException;
+import br.edu.utfpr.troubleshootingstandards.model.Anticipation;
+import br.edu.utfpr.troubleshootingstandards.model.Lecturer;
+import br.edu.utfpr.troubleshootingstandards.model.Modalities;
+import br.edu.utfpr.troubleshootingstandards.repository.AnticipationRepository;
+import br.edu.utfpr.troubleshootingstandards.repository.LecturerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

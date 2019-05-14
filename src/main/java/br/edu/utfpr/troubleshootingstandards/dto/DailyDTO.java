@@ -1,4 +1,4 @@
-package br.edu.utfpr.dto;
+package br.edu.utfpr.troubleshootingstandards.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

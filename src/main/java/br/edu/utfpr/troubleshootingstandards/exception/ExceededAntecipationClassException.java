@@ -1,4 +1,4 @@
-package br.edu.utfpr.exception;
+package br.edu.utfpr.troubleshootingstandards.exception;
 
 public class ExceededAntecipationClassException extends Exception {
     public ExceededAntecipationClassException(String message) {
