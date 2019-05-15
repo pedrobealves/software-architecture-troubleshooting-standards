@@ -83,7 +83,7 @@ public class AnticipationServiceTest {
                 .lecturer(lecturer)
                 .build();
 
-        when(lecturerRepository.findByCode(CODE)).thenReturn(lecturer);
+        when(lecturerRepository.findByCode(CODE)).thenReturn(Optional.of(lecturer));
 
     }
 
@@ -115,5 +115,10 @@ public class AnticipationServiceTest {
         ast.include(anticipationDTO);
 
         verify(anticipationRepository).save(anticipation);
+    }
+
+    @Test
+    public void shouldFindLecturerAnticipation() {
+
     }
 }
