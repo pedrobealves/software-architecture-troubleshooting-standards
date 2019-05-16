@@ -20,7 +20,8 @@ public class Anticipation implements Serializable {
     @GeneratedValue
     private Long id;
 
-    private String reason;
+    @Embedded
+    private Reason reason;
 
     @Enumerated (EnumType.STRING)
     private Modalities modalitie;
