@@ -26,6 +26,9 @@ public class Daily implements Serializable {
     @OneToOne
     private Anticipation anticipation;
 
+    @OneToOne
+    private AttendanceList attendanceList;
+
     private String content;
 
     private String note;
