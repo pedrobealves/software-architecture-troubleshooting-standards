@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import br.edu.utfpr.troubleshootingstandards.dto.StudentDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,8 +26,8 @@ public class StudentPresence implements Serializable {
     private long id;
 
     @OneToOne
-    private StudentDTO student;
+    private Student student;
 
     private boolean presence;
-    
+
 }

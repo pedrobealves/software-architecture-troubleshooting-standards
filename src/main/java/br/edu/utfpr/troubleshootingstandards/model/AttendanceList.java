@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import br.edu.utfpr.troubleshootingstandards.dto.StudentPresenceDTO;
-
 import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
@@ -28,6 +26,6 @@ public class AttendanceList implements Serializable {
     private Long id;
 
     @ElementCollection
-    private Set<StudentPresenceDTO> studentsList;
+    private Set<StudentPresence> studentsList;
 
 }
