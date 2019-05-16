@@ -2,11 +2,10 @@ package br.edu.utfpr.troubleshootingstandards.service;
 
 import br.edu.utfpr.troubleshootingstandards.dto.AnticipationDTO;
 import br.edu.utfpr.troubleshootingstandards.dto.LecturerDTO;
+import br.edu.utfpr.troubleshootingstandards.dto.ReasonDTO;
 import br.edu.utfpr.troubleshootingstandards.exception.DateAnticipationException;
 import br.edu.utfpr.troubleshootingstandards.exception.ExceededAntecipationClassException;
-import br.edu.utfpr.troubleshootingstandards.model.Anticipation;
-import br.edu.utfpr.troubleshootingstandards.model.Lecturer;
-import br.edu.utfpr.troubleshootingstandards.model.Modalities;
+import br.edu.utfpr.troubleshootingstandards.model.*;
 import br.edu.utfpr.troubleshootingstandards.repository.AnticipationRepository;
 import br.edu.utfpr.troubleshootingstandards.repository.LecturerRepository;
 import org.junit.Before;
@@ -65,7 +64,11 @@ public class AnticipationServiceTest {
 
         anticipationDTO = AnticipationDTO
                 .builder()
-                .reason(REASON)
+                .reason(ReasonDTO
+                        .builder()
+                        .reasonBy(ReasonBy.PREVISTO.name())
+                        .description(REASON)
+                        .build())
                 .date(DATE)
                 .previousDate(PREVIOUS_DATE)
                 .numberClasses(NUMBER_CLASSES)
@@ -75,7 +78,12 @@ public class AnticipationServiceTest {
 
         anticipation = Anticipation
                 .builder()
-                .reason(anticipationDTO.getReason())
+                .reason(Reason
+                        .builder()
+                        .reasonBy(ReasonBy.PREVISTO)
+                        .description(REASON)
+                        .build()
+                )
                 .date(anticipationDTO.getDate())
                 .previousDate(anticipationDTO.getPreviousDate())
                 .numberClasses(anticipationDTO.getNumberClasses())

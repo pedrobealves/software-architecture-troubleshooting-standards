@@ -13,7 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class AnticipationDTO {
-    private String reason;
+    private ReasonDTO reason;
     private boolean inPerson;
     private LecturerDTO lecturer;
     private int numberClasses;

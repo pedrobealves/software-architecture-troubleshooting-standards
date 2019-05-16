@@ -3,9 +3,7 @@ package br.edu.utfpr.troubleshootingstandards.service;
 import br.edu.utfpr.troubleshootingstandards.dto.AnticipationDTO;
 import br.edu.utfpr.troubleshootingstandards.exception.DateAnticipationException;
 import br.edu.utfpr.troubleshootingstandards.exception.ExceededAntecipationClassException;
-import br.edu.utfpr.troubleshootingstandards.model.Anticipation;
-import br.edu.utfpr.troubleshootingstandards.model.Lecturer;
-import br.edu.utfpr.troubleshootingstandards.model.Modalities;
+import br.edu.utfpr.troubleshootingstandards.model.*;
 import br.edu.utfpr.troubleshootingstandards.repository.AnticipationRepository;
 import br.edu.utfpr.troubleshootingstandards.repository.LecturerRepository;
 import lombok.AllArgsConstructor;
@@ -49,7 +47,12 @@ public class AnticipationServiceImpl implements AnticipationService {
         anticipationRepository.save(
                 Anticipation
                         .builder()
-                        .reason(anticipationDTO.getReason())
+                        .reason(Reason
+                                .builder()
+                                .reasonBy(ReasonBy.valueOf(anticipationDTO.getReason().getReasonBy()))
+                                .description(anticipationDTO.getReason().getDescription())
+                                .build()
+                        )
                         .modalitie(
                                 anticipationDTO.isInPerson() ?
                                         Modalities.PRESENCIAL :

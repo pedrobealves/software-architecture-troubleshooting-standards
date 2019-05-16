@@ -1,8 +1,6 @@
 package br.edu.utfpr.troubleshootingstandards.repository;
 
-import br.edu.utfpr.troubleshootingstandards.model.Anticipation;
-import br.edu.utfpr.troubleshootingstandards.model.Lecturer;
-import br.edu.utfpr.troubleshootingstandards.model.Modalities;
+import br.edu.utfpr.troubleshootingstandards.model.*;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +22,7 @@ import static org.assertj.core.api.Assertions.*;
 @TestPropertySource("classpath:application-test.properties")
 public class AnticipationRepositoryTest {
 
-    private static final String REASON = "Gripe";
+    private static final String REASON = "Convocações  de  trabalho  na  UTFPR";
     private static final Date DATE = new Date(2019, 5, 14);
     private static final Date PREVIOUS_DATE = new Date(2019, 5, 28);
     private static final int NUMBER_CLASSES = 2;
@@ -38,20 +36,31 @@ public class AnticipationRepositoryTest {
     @Autowired
     private LecturerRepository lecturerRepository;
 
-    private Lecturer lecturer;
     private Anticipation anticipation;
 
     @Before
-    public void setUp(){
-        lecturer = Lecturer
-                .builder()
-                .code(CODE)
-                .name(NAME)
-                .build();
+    public void setUp() {
+
+        lecturerRepository.save(
+                Lecturer
+                        .builder()
+                        .code(CODE)
+                        .name(NAME)
+                        .build()
+        );
+
+        Lecturer lecturer = lecturerRepository
+                .findByCode(CODE)
+                .orElseThrow(IllegalArgumentException::new);
 
         anticipation = Anticipation
                 .builder()
-                .reason(REASON)
+                .reason(Reason
+                        .builder()
+                        .reasonBy(ReasonBy.PREVISTO)
+                        .description(REASON)
+                        .build()
+                )
                 .date(DATE)
                 .previousDate(PREVIOUS_DATE)
                 .numberClasses(NUMBER_CLASSES)
