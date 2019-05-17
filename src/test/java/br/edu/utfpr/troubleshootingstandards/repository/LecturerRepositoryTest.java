@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
@@ -15,6 +16,8 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.Assert.*;
 
+@Sql(value = "/load-database.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(value = "/clean-database.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @TestPropertySource("classpath:application-test.properties")
@@ -23,30 +26,20 @@ public class LecturerRepositoryTest {
     @Autowired
     LecturerRepository lecturerRepository;
 
-    @Before
-    public void setUp(){
-        lecturerRepository.save(
-                Lecturer.builder()
-                .code("123456")
-                .name("Joe")
-                .build()
-        );
-    }
-
     @Test
     public void shouldGetData() {
-        Optional<Lecturer> optional = lecturerRepository.findByCode("123456");
+        Optional<Lecturer> optional = lecturerRepository.findById((long)123456);
 
         assertThat(optional.isPresent()).isTrue();
 
         Lecturer lecturer = optional.get();
-        assertThat(lecturer.getCode()).isEqualTo("123456");
+        assertThat(lecturer.getId()).isEqualTo(123456);
         assertThat(lecturer.getName()).isEqualTo("Joe");
     }
 
     @Test
     public void shouldNotGetData() {
-        Optional<Lecturer> optional = lecturerRepository.findByCode("123");
+        Optional<Lecturer> optional = lecturerRepository.findById((long)123);
 
         assertThat(optional.isPresent()).isFalse();
     }

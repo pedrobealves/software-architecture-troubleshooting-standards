@@ -1,22 +1,21 @@
 package br.edu.utfpr.troubleshootingstandards.repository;
 
 import br.edu.utfpr.troubleshootingstandards.model.*;
-import org.assertj.core.api.Assertions;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
 import java.util.Optional;
 
-import static br.edu.utfpr.troubleshootingstandards.service.AnticipationServiceTest.CODE;
 import static org.assertj.core.api.Assertions.*;
 
+@Sql(value = "/load-database.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(value = "/clean-database.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @TestPropertySource("classpath:application-test.properties")
@@ -27,59 +26,25 @@ public class AnticipationRepositoryTest {
     private static final Date PREVIOUS_DATE = new Date(2019, 5, 28);
     private static final int NUMBER_CLASSES = 2;
     private static final boolean IN_PERSON = true;
-    public static final String CODE = "123456";
+    public static final long CODE = 123456;
     public static final String NAME = "Joe";
 
     @Autowired
-    private AnticipationRepository anticipationRepository;
+    private ProposalAnticipationRepository anticipationRepository;
 
     @Autowired
     private LecturerRepository lecturerRepository;
 
     private Anticipation anticipation;
 
-    @Before
-    public void setUp() {
-
-        lecturerRepository.save(
-                Lecturer
-                        .builder()
-                        .code(CODE)
-                        .name(NAME)
-                        .build()
-        );
-
-        Lecturer lecturer = lecturerRepository
-                .findByCode(CODE)
-                .orElseThrow(IllegalArgumentException::new);
-
-        anticipation = Anticipation
-                .builder()
-                .reason(Reason
-                        .builder()
-                        .reasonBy(ReasonBy.PREVISTO)
-                        .description(REASON)
-                        .build()
-                )
-                .date(DATE)
-                .previousDate(PREVIOUS_DATE)
-                .numberClasses(NUMBER_CLASSES)
-                .modalitie(Modalities.PRESENCIAL)
-                .lecturer(lecturer)
-                .build();
-
-        anticipationRepository.save(anticipation);
-
-    }
-
     @Test
     public void shouldGetDataLecturer() {
-        Optional<Lecturer> optional = lecturerRepository.findByCode("123456");
+        Optional<Lecturer> optional = lecturerRepository.findById( (long) 123456);
 
         assertThat(optional.isPresent()).isTrue();
 
         Lecturer lecturer = optional.get();
-        assertThat(lecturer.getCode()).isEqualTo("123456");
+        assertThat(lecturer.getId()).isEqualTo(123456);
         assertThat(lecturer.getName()).isEqualTo("Joe");
     }
 

@@ -8,11 +8,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Data
-@Builder
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class StudentDTO {
     private String name;
     private long code;

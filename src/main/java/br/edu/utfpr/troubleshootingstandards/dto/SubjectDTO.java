@@ -11,8 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class SubjectDTO {
     
-    private String code;
+    private long code;
     private String name;
-    private LecturerDTO lecturer;
-    
 }

@@ -18,6 +18,5 @@ public class Subject implements Serializable {
     @Id @GeneratedValue
     private long id;
     
-    private String code;
     private String name;
 }

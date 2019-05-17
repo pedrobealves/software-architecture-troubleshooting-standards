@@ -1,6 +1,5 @@
 package br.edu.utfpr.troubleshootingstandards.model;
 
-import br.edu.utfpr.troubleshootingstandards.dto.AnticipationDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 @Data
@@ -15,17 +15,23 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Daily implements Serializable {
-
+public class Lesson implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
 
-    @OneToOne
-    private ApprovalAnticipation approvalAnticipation;
+    @ManyToOne
+    private ClassCourse classCourse;
 
     @OneToOne
-    private Lesson lesson;
+    private AttendanceStudent attendanceStudent;
 
-    private String note;
+    private String content;
+
+    @Column(name="number_classes")
+    private int numberClasses;
+
+    @Temporal(TemporalType.DATE)
+    private Date date;
+
 }

@@ -8,13 +8,14 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-public class Lecturer {
+public class CoordinatorCourse implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
