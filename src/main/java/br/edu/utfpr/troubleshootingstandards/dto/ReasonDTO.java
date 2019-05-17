@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 public class ReasonDTO {
 
     private String reasonBy;
-
     private String description;
 
 }

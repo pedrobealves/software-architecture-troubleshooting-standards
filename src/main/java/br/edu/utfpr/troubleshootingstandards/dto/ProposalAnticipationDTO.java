@@ -1,16 +1,20 @@
 package br.edu.utfpr.troubleshootingstandards.dto;
 
-import java.util.Set;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
+
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AttendanceListDTO {
-    private Set<StudentPresenceDTO> studentsList;
+@Builder
+public class ProposalAnticipationDTO {
+    private long id;
+    private AnticipationDTO anticipation;
+    private LessonDTO lesson;
+    private Set<AttendanceDTO> consents;
 }

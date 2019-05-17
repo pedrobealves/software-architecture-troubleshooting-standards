@@ -28,6 +28,4 @@ public class Student implements Serializable {
 
     private String name;
 
-    private long code;
-
 }

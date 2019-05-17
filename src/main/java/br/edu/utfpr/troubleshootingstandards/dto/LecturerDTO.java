@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class LecturerDTO {
 
-    private String code;
+    private long code;
     private String name;
 
 }

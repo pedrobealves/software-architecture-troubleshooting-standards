@@ -2,16 +2,15 @@ package br.edu.utfpr.troubleshootingstandards.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Builder
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentPresenceDTO {
-    private StudentDTO student;
-    private boolean presence;
+@Builder
+public class DepartmentLeaderDTO {
+    private long code;
+    private String name;
+    private DepartmentDTO department;
 }

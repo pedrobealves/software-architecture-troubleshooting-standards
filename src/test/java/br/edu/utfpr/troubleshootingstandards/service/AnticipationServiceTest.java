@@ -6,7 +6,7 @@ import br.edu.utfpr.troubleshootingstandards.dto.ReasonDTO;
 import br.edu.utfpr.troubleshootingstandards.exception.DateAnticipationException;
 import br.edu.utfpr.troubleshootingstandards.exception.ExceededAntecipationClassException;
 import br.edu.utfpr.troubleshootingstandards.model.*;
-import br.edu.utfpr.troubleshootingstandards.repository.AnticipationRepository;
+import br.edu.utfpr.troubleshootingstandards.repository.ProposalAnticipationRepository;
 import br.edu.utfpr.troubleshootingstandards.repository.LecturerRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +17,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Date;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -29,11 +28,11 @@ public class AnticipationServiceTest {
     private static final Date PREVIOUS_DATE = new Date(2019, 5, 28);
     private static final int NUMBER_CLASSES = 2;
     private static final boolean IN_PERSON = true;
-    public static final String CODE = "123456";
+    public static final long CODE = 123456;
     public static final String NAME = "Joe";
 
     @MockBean
-    private AnticipationRepository anticipationRepository;
+    private ProposalAnticipationRepository anticipationRepository;
 
     @MockBean
     private LecturerRepository lecturerRepository;
@@ -58,7 +57,7 @@ public class AnticipationServiceTest {
 
         lecturer = Lecturer
                 .builder()
-                .code(lecturerDTO.getCode())
+                .id(lecturerDTO.getCode())
                 .name(lecturerDTO.getName())
                 .build();
 
@@ -91,7 +90,7 @@ public class AnticipationServiceTest {
                 .lecturer(lecturer)
                 .build();
 
-        when(lecturerRepository.findByCode(CODE)).thenReturn(Optional.of(lecturer));
+        when(lecturerRepository.findById(CODE)).thenReturn(Optional.of(lecturer));
 
     }
 

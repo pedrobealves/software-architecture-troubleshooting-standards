@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
+@Embeddable
 public class Anticipation implements Serializable {
 
     @Id
@@ -26,17 +26,11 @@ public class Anticipation implements Serializable {
     @Enumerated (EnumType.STRING)
     private Modalities modalitie;
 
-    @OneToOne
-    private Lecturer lecturer;
-
     @Column(name="number_classes")
     private int numberClasses;
 
-    @Column(name="previous_date")
+    @Column(name="next_date")
     @Temporal(TemporalType.DATE)
-    private Date previousDate;
-
-    @Temporal (TemporalType.DATE)
-    private Date date;
+    private Date nextDate;
 
 }

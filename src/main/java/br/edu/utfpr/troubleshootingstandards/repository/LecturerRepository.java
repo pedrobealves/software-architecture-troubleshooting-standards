@@ -5,6 +5,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface LecturerRepository extends JpaRepository<Lecturer, Long> {
-    Optional<Lecturer> findByCode(String code);
-}
+public interface LecturerRepository extends JpaRepository<Lecturer, Long> {}
