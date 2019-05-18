@@ -1,11 +1,10 @@
 package br.edu.utfpr.troubleshootingstandards.service;
 
-import br.edu.utfpr.troubleshootingstandards.dto.AnticipationDTO;
-import br.edu.utfpr.troubleshootingstandards.dto.LecturerDTO;
-import br.edu.utfpr.troubleshootingstandards.dto.ReasonDTO;
+import br.edu.utfpr.troubleshootingstandards.dto.*;
 import br.edu.utfpr.troubleshootingstandards.exception.DateAnticipationException;
 import br.edu.utfpr.troubleshootingstandards.exception.ExceededAntecipationClassException;
 import br.edu.utfpr.troubleshootingstandards.model.*;
+import br.edu.utfpr.troubleshootingstandards.repository.LessonRepository;
 import br.edu.utfpr.troubleshootingstandards.repository.ProposalAnticipationRepository;
 import br.edu.utfpr.troubleshootingstandards.repository.LecturerRepository;
 import org.junit.Before;
@@ -24,42 +23,33 @@ import static org.mockito.Mockito.when;
 public class AnticipationServiceTest {
 
     private static final String REASON = "Gripe";
-    private static final Date DATE = new Date(2019, 5, 14);
-    private static final Date PREVIOUS_DATE = new Date(2019, 5, 28);
+    private static final Date NEXT_DATE = new Date(2019, 5, 14);
+    private static final Date DATE = new Date(2019, 5, 28);
     private static final int NUMBER_CLASSES = 2;
     private static final boolean IN_PERSON = true;
     public static final long CODE = 123456;
     public static final String NAME = "Joe";
+    public static final String ESTRUTURAS = "Estruturas";
 
     @MockBean
     private ProposalAnticipationRepository anticipationRepository;
 
     @MockBean
-    private LecturerRepository lecturerRepository;
+    private LessonRepository lessonRepository;
 
-    private AnticipationService ast;
+    private AnticipationServiceImpl ast;
 
+    private ProposalAnticipationDTO proposalAnticipationDTO;
     private AnticipationDTO anticipationDTO;
-    private LecturerDTO lecturerDTO;
+    private LessonDTO lessonDTO;
 
+    private ProposalAnticipation proposalAnticipation;
     private Anticipation anticipation;
-    private Lecturer lecturer;
+    private Lesson lesson;
 
     @Before
     public void setUp() throws Exception{
-        ast = new AnticipationServiceImpl(lecturerRepository, anticipationRepository);
-
-        lecturerDTO = LecturerDTO
-                .builder()
-                .code(CODE)
-                .name(NAME)
-                .build();
-
-        lecturer = Lecturer
-                .builder()
-                .id(lecturerDTO.getCode())
-                .name(lecturerDTO.getName())
-                .build();
+        ast = new AnticipationServiceImpl(lessonRepository, anticipationRepository);
 
         anticipationDTO = AnticipationDTO
                 .builder()
@@ -68,37 +58,43 @@ public class AnticipationServiceTest {
                         .reasonBy(ReasonBy.PREVISTO.name())
                         .description(REASON)
                         .build())
-                .date(DATE)
-                .previousDate(PREVIOUS_DATE)
+                .nextDate(NEXT_DATE)
                 .numberClasses(NUMBER_CLASSES)
                 .inPerson(IN_PERSON)
-                .lecturer(lecturerDTO)
                 .build();
 
-        anticipation = Anticipation
+        lessonDTO = LessonDTO
                 .builder()
-                .reason(Reason
-                        .builder()
-                        .reasonBy(ReasonBy.PREVISTO)
-                        .description(REASON)
-                        .build()
-                )
-                .date(anticipationDTO.getDate())
-                .previousDate(anticipationDTO.getPreviousDate())
-                .numberClasses(anticipationDTO.getNumberClasses())
-                .modalitie(anticipationDTO.isInPerson() ? Modalities.PRESENCIAL : Modalities.NÃO_PRESENCIAL)
-                .lecturer(lecturer)
+                .id(CODE)
+                .content(ESTRUTURAS)
+                .date(DATE)
                 .build();
 
-        when(lecturerRepository.findById(CODE)).thenReturn(Optional.of(lecturer));
+        proposalAnticipationDTO = ProposalAnticipationDTO
+                .builder()
+                .anticipation(anticipationDTO)
+                .lesson(lessonDTO)
+                .build();
+
+        anticipation = anticipationDTOtoAnticipation(proposalAnticipationDTO.getAnticipation());
+        lesson = lessonDTOtoLesson(proposalAnticipationDTO.getLesson());
+
+        proposalAnticipation = ProposalAnticipation
+                .builder()
+                .anticipation(anticipation)
+                .lesson(lesson)
+                .build();
+
+
+        when(lessonRepository.findById(CODE)).thenReturn(Optional.of(lesson));
 
     }
 
     @Test
     public void shouldInclude() throws Exception {
-        ast.include(anticipationDTO);
+        ast.include(proposalAnticipationDTO);
 
-        verify(anticipationRepository).save(anticipation);
+        verify(anticipationRepository).save(proposalAnticipation);
     }
 
     @Test(expected = ExceededAntecipationClassException.class)
@@ -108,24 +104,52 @@ public class AnticipationServiceTest {
 
         anticipation.setNumberClasses(anticipationDTO.getNumberClasses());
 
-        ast.include(anticipationDTO);
+        ast.include(proposalAnticipationDTO);
 
-        verify(anticipationRepository).save(anticipation);
+        verify(anticipationRepository).save(proposalAnticipation);
     }
 
     @Test(expected = DateAnticipationException.class)
     public void shouldNotIncludeAfterDate() throws Exception {
-        anticipationDTO.setDate(new Date(2019, 6, 5));
+        anticipationDTO.setNextDate(new Date(2019, 6, 5));
 
-        anticipation.setDate(anticipationDTO.getDate());
+        anticipation.setNextDate(anticipationDTO.getNextDate());
 
-        ast.include(anticipationDTO);
+        ast.include(proposalAnticipationDTO);
 
-        verify(anticipationRepository).save(anticipation);
+        verify(anticipationRepository).save(proposalAnticipation);
     }
 
     @Test
     public void shouldFindLecturerAnticipation() {
 
+    }
+
+
+    private Lesson lessonDTOtoLesson(LessonDTO lessonDTO){
+        return Lesson
+                .builder()
+                .id(lessonDTO.getId())
+                .content(lessonDTO.getContent())
+                .date(lessonDTO.getDate())
+                .build();
+    }
+
+    private Anticipation anticipationDTOtoAnticipation(AnticipationDTO anticipationDTO){
+        return Anticipation
+                .builder()
+                .reason(Reason
+                        .builder()
+                        .reasonBy(ReasonBy.valueOf(anticipationDTO.getReason().getReasonBy()))
+                        .description(anticipationDTO.getReason().getDescription())
+                        .build()
+                )
+                .modalitie(
+                        anticipationDTO.isInPerson() ?
+                                Modalities.PRESENCIAL :
+                                Modalities.NÃO_PRESENCIAL)
+                .numberClasses(anticipationDTO.getNumberClasses())
+                .nextDate(anticipationDTO.getNextDate())
+                .build();
     }
 }

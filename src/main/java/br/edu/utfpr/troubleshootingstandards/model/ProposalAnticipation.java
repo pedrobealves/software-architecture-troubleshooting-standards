@@ -23,12 +23,12 @@ public class ProposalAnticipation implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @Embedded
+    @OneToOne(cascade = CascadeType.ALL)
     private Anticipation anticipation;
 
     @OneToOne
     private Lesson lesson;
 
-    @OneToMany
-    private Set<Attendance> consents;
+    @OneToOne(cascade = CascadeType.ALL)
+    private AttendanceStudent consents;
 }

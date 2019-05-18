@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder
 public class DailyDTO {
     private long id;
-    private ApprovalAnticipationDTO approvalAnticipation;
+    private AnticipationDTO anticipationDTO;
     private LessonDTO lesson;
     private String note;
 }

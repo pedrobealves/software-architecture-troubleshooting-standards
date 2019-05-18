@@ -22,7 +22,7 @@ public class Daily implements Serializable {
     private Long id;
 
     @OneToOne
-    private ApprovalAnticipation approvalAnticipation;
+    private Anticipation anticipation;
 
     @OneToOne
     private Lesson lesson;

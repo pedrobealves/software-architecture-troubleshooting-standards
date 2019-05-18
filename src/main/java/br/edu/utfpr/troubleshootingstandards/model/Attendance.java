@@ -20,4 +20,7 @@ public class Attendance implements Serializable {
     private Student student;
 
     private boolean presence;
+
+    @ManyToOne
+    private AttendanceStudent attendanceStudent;
 }
