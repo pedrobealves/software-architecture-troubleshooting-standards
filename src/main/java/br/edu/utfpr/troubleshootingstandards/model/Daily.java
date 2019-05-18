@@ -22,9 +22,6 @@ public class Daily implements Serializable {
     private Long id;
 
     @OneToOne
-    private Anticipation anticipation;
-
-    @OneToOne
     private Lesson lesson;
 
     private String note;

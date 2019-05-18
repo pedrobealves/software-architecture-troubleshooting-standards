@@ -23,7 +23,7 @@ public class ProposalAnticipation implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @Embedded
     private Anticipation anticipation;
 
     @OneToOne

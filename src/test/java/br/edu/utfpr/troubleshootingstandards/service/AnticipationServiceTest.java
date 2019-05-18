@@ -120,11 +120,6 @@ public class AnticipationServiceTest {
         verify(anticipationRepository).save(proposalAnticipation);
     }
 
-    @Test
-    public void shouldFindLecturerAnticipation() {
-
-    }
-
 
     private Lesson lessonDTOtoLesson(LessonDTO lessonDTO){
         return Lesson

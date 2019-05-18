@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -19,6 +20,7 @@ public class LessonDTO implements Serializable {
 
     private Long id;
     private ClassCourseDTO classCourse;
+    private Set<String> type;
     private AttendanceStudentDTO attendanceStudent;
     private String content;
     private int numberClasses;
