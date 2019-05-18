@@ -21,14 +21,6 @@ import static org.assertj.core.api.Assertions.*;
 @TestPropertySource("classpath:application-test.properties")
 public class AnticipationRepositoryTest {
 
-    private static final String REASON = "Convocações  de  trabalho  na  UTFPR";
-    private static final Date DATE = new Date(2019, 5, 14);
-    private static final Date PREVIOUS_DATE = new Date(2019, 5, 28);
-    private static final int NUMBER_CLASSES = 2;
-    private static final boolean IN_PERSON = true;
-    public static final long CODE = 123456;
-    public static final String NAME = "Joe";
-
     @Autowired
     private ProposalAnticipationRepository anticipationRepository;
 
@@ -39,7 +31,7 @@ public class AnticipationRepositoryTest {
 
     @Test
     public void shouldGetDataLecturer() {
-        Optional<Lecturer> optional = lecturerRepository.findById( (long) 123456);
+        Optional<Lecturer> optional = lecturerRepository.findById(123456L);
 
         assertThat(optional.isPresent()).isTrue();
 
