@@ -23,6 +23,9 @@ public class Lesson implements Serializable {
     @ManyToOne
     private ClassCourse classCourse;
 
+    @ElementCollection
+    private Set<String> type;
+
     @OneToOne
     private AttendanceStudent attendanceStudent;
 

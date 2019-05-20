@@ -24,7 +24,7 @@ public class AttendanceStudent implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @OneToMany
+    @OneToMany(mappedBy="attendanceStudent", orphanRemoval = true)
     private Set<Attendance> attendance;
 
     private String note;

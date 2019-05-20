@@ -16,5 +16,5 @@ public class ProposalAnticipationDTO {
     private long id;
     private AnticipationDTO anticipation;
     private LessonDTO lesson;
-    private Set<AttendanceDTO> consents;
+    private AttendanceStudentDTO consents;
 }

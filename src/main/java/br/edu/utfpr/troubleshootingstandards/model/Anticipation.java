@@ -13,12 +13,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
+@Embeddable
 public class Anticipation implements Serializable {
-
-    @Id
-    @GeneratedValue
-    private Long id;
 
     @Embedded
     private Reason reason;
