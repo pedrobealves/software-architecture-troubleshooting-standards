@@ -24,20 +24,49 @@ public class AnticipationRepositoryTest {
     @Autowired
     private ProposalAnticipationRepository anticipationRepository;
 
-    @Autowired
-    private LecturerRepository lecturerRepository;
-
     private Anticipation anticipation;
 
     @Test
-    public void shouldGetDataLecturer() {
-        Optional<Lecturer> optional = lecturerRepository.findById(123456L);
+    public void shouldGetDataAnticipation() {
+        Optional<ProposalAnticipation> optional = anticipationRepository.findById(1L);
 
         assertThat(optional.isPresent()).isTrue();
 
-        Lecturer lecturer = optional.get();
+        ProposalAnticipation anticipation = optional.get();
+        assertThat(anticipation.getId()).isEqualTo(1);
+    }
+
+    @Test
+    public void shouldGetDataLesson() {
+        Optional<ProposalAnticipation> optional = anticipationRepository.findById(1L);
+
+        assertThat(optional.isPresent()).isTrue();
+
+        Lesson lesson = optional.get().getLesson();
+        assertThat(lesson.getId()).isEqualTo(75);
+        assertThat(lesson.getContent()).isEqualTo("Lista Encadeada");
+    }
+
+    @Test
+    public void shouldGetDataLecturer() {
+        Optional<ProposalAnticipation> optional = anticipationRepository.findById(1L);
+
+        assertThat(optional.isPresent()).isTrue();
+
+        Lecturer lecturer = optional.get().getLesson().getClassCourse().getLecturer();
         assertThat(lecturer.getId()).isEqualTo(123456);
         assertThat(lecturer.getName()).isEqualTo("Joe");
+    }
+
+    @Test
+    public void shouldGetNotDataLecturer() {
+        Optional<ProposalAnticipation> optional = anticipationRepository.findById(1L);
+
+        assertThat(optional.isPresent()).isTrue();
+
+        Lecturer lecturer = optional.get().getLesson().getClassCourse().getLecturer();
+        assertThat(lecturer.getId()).isNotEqualTo(54547);
+        assertThat(lecturer.getName()).isNotEqualTo("Willy");
     }
 
 }

@@ -7,8 +7,12 @@ import br.edu.utfpr.troubleshootingstandards.model.Modalities;
 import br.edu.utfpr.troubleshootingstandards.model.ProposalAnticipation;
 import br.edu.utfpr.troubleshootingstandards.repository.ApprovalAnticipationRepository;
 import br.edu.utfpr.troubleshootingstandards.repository.LessonRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@AllArgsConstructor
+@Component
 public class ApprovalAnticipationServiceImpl implements ApprovalAnticipationService {
 
     @Autowired
@@ -20,7 +24,7 @@ public class ApprovalAnticipationServiceImpl implements ApprovalAnticipationServ
     @Override
     public void approval(ApprovalAnticipationDTO approvalAnticipationDTO) throws ConsentsAnticipationException {
 
-        int numberConsents = approvalAnticipationDTO.getProposalAnticipationDTO().getConsents().size();
+        int numberConsents = approvalAnticipationDTO.getProposalAnticipationDTO().getConsents().getAttendance().size();
 
         double numberStudentsP = approvalAnticipationDTO.getProposalAnticipationDTO().getLesson().getClassCourse().getStudents().size() * 0.75;
 

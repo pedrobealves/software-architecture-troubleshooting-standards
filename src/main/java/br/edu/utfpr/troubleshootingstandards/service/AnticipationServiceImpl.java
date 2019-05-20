@@ -5,6 +5,7 @@ import br.edu.utfpr.troubleshootingstandards.dto.ProposalAnticipationDTO;
 import br.edu.utfpr.troubleshootingstandards.exception.DateAnticipationException;
 import br.edu.utfpr.troubleshootingstandards.exception.ExceededAntecipationClassException;
 import br.edu.utfpr.troubleshootingstandards.model.*;
+import br.edu.utfpr.troubleshootingstandards.repository.AttendanceStudentRepository;
 import br.edu.utfpr.troubleshootingstandards.repository.LessonRepository;
 import br.edu.utfpr.troubleshootingstandards.repository.ProposalAnticipationRepository;
 import br.edu.utfpr.troubleshootingstandards.repository.LecturerRepository;
@@ -21,6 +22,9 @@ public class AnticipationServiceImpl implements AnticipationService {
 
     @Autowired
     private ProposalAnticipationRepository anticipationRepository;
+
+    @Autowired
+    private AttendanceStudentRepository attendanceStudentRepository;
 
     /**
      *
@@ -43,11 +47,16 @@ public class AnticipationServiceImpl implements AnticipationService {
                 .findById(proposalAnticipationDTO.getLesson().getId())
                 .orElseThrow(IllegalArgumentException::new);
 
+        AttendanceStudent consents = attendanceStudentRepository
+                .findById(proposalAnticipationDTO.getConsents().getId())
+                .orElseThrow(IllegalArgumentException::new);
+
         anticipationRepository.save(
                 ProposalAnticipation
                         .builder()
                         .anticipation(anticipationDTOtoAnticipation(proposalAnticipationDTO.getAnticipation()))
                         .lesson(lesson)
+                        .consents(consents)
                         .build()
         );
 
