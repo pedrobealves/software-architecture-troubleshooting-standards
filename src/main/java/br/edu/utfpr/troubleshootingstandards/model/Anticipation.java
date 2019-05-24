@@ -1,6 +1,6 @@
 package br.edu.utfpr.troubleshootingstandards.model;
 
-import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor; // acho que simplesmente escrever lombok.* seria bom pra reduzir linha de código com importação
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;

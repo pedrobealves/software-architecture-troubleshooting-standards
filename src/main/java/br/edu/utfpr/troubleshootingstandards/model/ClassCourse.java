@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.*;
-
+// acho que simplesmente escrever lombok.* seria bom pra reduzir linha de código com importação
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
