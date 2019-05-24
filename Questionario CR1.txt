@@ -1,0 +1,78 @@
+Questionário para code review 1
+
+Esse questionário deve ser usado como guia durante o primeiro code review. Vocês podem fazer outras observações caso achem pertinentes.
+
+-> Manutenibilidade
+
+- O projeto contém alguma descrição arquitetural de atividades para auxiliar no entendimento das regras de negócio?
+Nos métodos implementados nas classes de serviço parece ter anotações das regras de negócio para entendimento das rotinas.
+
+- O projeto contém alguma descrição arquitetural de comunicação/sequência para auxiliar no entendimento do fluxo de comunicação entre as classes?
+Nenhum descrição parece demonstrar a relação entre as classe model, repositório e serviço.
+
+- As classes/métodos são curtos o suficiente para facilitar o entendimento?
+Sim, as classes dos pacotes model e dto utilizado as anotação da biblioteca Lombok para gerar os métodos de get/set e os construtores, as classes DAO utilizam o repositório JPA para persistir os dados usando Hibernate.
+
+- A decomposição da arquitetura em pacotes/classes beneficia ao máximo a manutenibilidade?
+Sim, a princípio a arquitetura parece demonstrar o princípio Open Closed do SOLID, algumas classes não impactam em outras se estas sofrerem alterações, evidenciando um acoplamento razoavelmente fraco.
+
+->  Princípios de desenvolvimento
+
+- O projeto usa inversão de dependência de forma adequada?
+As classes de serviço implementam as interfaces de serviço e dependem das interfaces de repositório.
+
+- O projeto usa o princípio open-closed quando conveniente?
+As interfaces de repositório possuem espaço para a inserção de métodos próprios ao mesmo tempo que podem ser utilizadas pelas interfaces e classes de serviço.
+
+- O projeto usa o princípio de substituição de Liskov quando conveniente?
+Sim, nenhuma sub-classe sobrescreve métodos de classes bases.
+
+- O projeto usa o princípio de segregação de interfaces quanto conveniente?
+Sim, as interfaces de serviço só possuem métodos que são realmente utilizados pelas classes de serviço.
+
+- O projeto evita repetição frequente de código?
+As classes model e dto utilizam a biblioteca Lombok para gerar construtores e métodos Get/Set, as classes de repositório utilizam o repositório JPA para persistência.
+
+- As rotinas implementadas nos métodos são simples de entender e alterar?
+Sim, algumas anotações parece auxiliar na compreensão de algumas linhas de código inseridas nos métodos implementados.
+
+- O acoplamento entre as classes é o menor possível dentro do contexto do projeto?
+Sim, o acoplamento aparenta ser razoavelmente fraco entre as classes models e entre as classes e interfaces de serviço e repositório.
+
+- As classes estão coesas?
+Sim, a implementação das classes são fáceis de compreender.
+
+-> Estruturas arquiteturais
+
+- A estrutura de dados foi implementada corretamente?
+A estrutura de camadas parece ser bem utilizada.
+
+- A estrutura de camadas foi implementada corretamente?
+Sim, a separação entre serviço, repositório, model e dto parecem obedecer a estrutura de camadas.
+
+- O Github foi corretamente utilizado para representar/controlar a estrutura de alocação da equipe?
+Apenas um membro da equipe parece ter enviado o código.
+
+-> Padrões de projeto 
+
+- Algum padrão de projeto foi usado quando conveniente?
+Padrão MVC (Model,View,Controller)
+
+- A estrutura do padrão de projeto foi implementada corretamente? 
+Sim, classes model, repositórios de persistência e controladores de serviço
+
+-> Bibliotecas
+
+- Alguma biblioteca foi usada quando conveniente?
+Sim, a biblioteca Lombok para gerar construtores de métodos Get/Set, a biblioteca springframework para anotações e o repositório JPA
+
+- Algum mecanismo de gerenciamento de bibliotecas foi usado? (ex: Maven)
+Sim, o Maven Spring-boot foi utilizado para inserir as dependências do springframework, hibernate, lombok e de banco de dados H2
+
+ -> Framework
+
+- Algum framework foi usado quando conveniente?
+Sim, o springframework é utilizado nas interfaces de repositório.
+
+- O framework adotado gera algum benefício claramente perceptível?
+Sim, o repositório JPA auxilia ao reduzir linha de código.
