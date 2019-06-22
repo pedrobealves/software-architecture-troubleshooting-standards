@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.edu.utfpr</groupId>
-    <artifactId>troubleshooting-standards</artifactId>
+    <artifactId>server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>troubleshooting-standards</name>
+    <name>server</name>
     <description>Development of the architectural structures for norms for Anticipation of face-to-face classes of UTFPR
         Technical and Professional Education Courses.
     </description>
