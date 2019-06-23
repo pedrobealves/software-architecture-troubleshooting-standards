@@ -2,14 +2,15 @@ package br.edu.utfpr.troubleshootingstandards.service;
 
 import br.edu.utfpr.troubleshootingstandards.dto.ApprovalAnticipationDTO;
 import br.edu.utfpr.troubleshootingstandards.exception.ConsentsAnticipationException;
-import br.edu.utfpr.troubleshootingstandards.model.Lesson;
-import br.edu.utfpr.troubleshootingstandards.model.Modalities;
-import br.edu.utfpr.troubleshootingstandards.model.ProposalAnticipation;
 import br.edu.utfpr.troubleshootingstandards.repository.ApprovalAnticipationRepository;
 import br.edu.utfpr.troubleshootingstandards.repository.LessonRepository;
+import br.edu.utfpr.troubleshootingstandards.service.mapper.ApprovalAnticipationMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Component
@@ -21,30 +22,47 @@ public class ApprovalAnticipationServiceImpl implements ApprovalAnticipationServ
     @Autowired
     private ApprovalAnticipationRepository approvalAnticipationRepository;
 
+    @Autowired
+    private ApprovalAnticipationMapper approvalAnticipationMapper;
+
     @Override
-    public void approval(ApprovalAnticipationDTO approvalAnticipationDTO) throws ConsentsAnticipationException {
+    public void include(ApprovalAnticipationDTO approvalAnticipationDTO) throws ConsentsAnticipationException {
 
-        int numberConsents = approvalAnticipationDTO.getProposalAnticipationDTO().getConsents().getAttendance().size();
+        int numberConsents = approvalAnticipationDTO.getConsents().getAttendance().size();
 
-        double numberStudentsP = approvalAnticipationDTO.getProposalAnticipationDTO().getLesson().getClassCourse().getStudents().size() * 0.75;
+        double numberStudentsP = approvalAnticipationDTO.getProposalAnticipation().getLesson().getClassCourse().getStudents().size() * 0.75;
 
         if (numberConsents < numberStudentsP)
             throw new ConsentsAnticipationException("Não possui uma lista de anuência com no mínimo 75%");
 
-
-        long idLesson = approvalAnticipationDTO.getProposalAnticipationDTO().getLesson().getId();
+        long idLesson = approvalAnticipationDTO.getProposalAnticipation().getLesson().getId();
 
         lessonRepository.findById(idLesson)
                 .map(record -> {
                     record.getType().add(
-                            approvalAnticipationDTO.getProposalAnticipationDTO().getAnticipation().isInPerson() ?
-                                    Modalities.PRESENCIAL.name() :
-                                    Modalities.NÃO_PRESENCIAL.name()
+                            approvalAnticipationDTO.getProposalAnticipation().getAnticipation().getModalitie()
                     );
                     return lessonRepository.save(record);
                 });
 
-        approvalAnticipationRepository.findById(approvalAnticipationDTO.getId())
+
+        approvalAnticipationRepository
+                .save(
+                        approvalAnticipationMapper
+                                .toApprovalAnticipation(approvalAnticipationDTO)
+                );
+    }
+
+    @Override
+    public Optional<ApprovalAnticipationDTO> getById(Long id) {
+        return approvalAnticipationRepository
+                .findById(id)
+                .map(a -> approvalAnticipationMapper.toApprovalAnticipationDTO(a));
+    }
+
+    @Override
+    public void approval(long id){
+        approvalAnticipationRepository.findById(id)
                 .map(record -> {
                     record.setApproved(true);
                     return approvalAnticipationRepository.save(record);

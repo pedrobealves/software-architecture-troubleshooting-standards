@@ -1,6 +1,6 @@
 package br.edu.utfpr.troubleshootingstandards.repository;
 
-import br.edu.utfpr.troubleshootingstandards.model.*;
+import br.edu.utfpr.troubleshootingstandards.entity.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +9,10 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Date;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 
-@Sql(value = "/load-database.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = "/clean-database.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @RunWith(SpringRunner.class)
 @DataJpaTest

@@ -15,7 +15,7 @@ import java.util.Date;
 public class AnticipationDTO {
     private long id;
     private ReasonDTO reason;
-    private boolean inPerson;
+    private String modalitie;
     private int numberClasses;
     private Date nextDate;
 }
