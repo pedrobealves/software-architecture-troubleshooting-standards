@@ -1,5 +1,6 @@
 package br.edu.utfpr.troubleshootingstandards.dto;
 
+import br.edu.utfpr.troubleshootingstandards.entity.ApprovalAnticipation;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

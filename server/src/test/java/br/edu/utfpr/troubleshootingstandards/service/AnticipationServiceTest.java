@@ -6,6 +6,7 @@ import br.edu.utfpr.troubleshootingstandards.exception.ExceededAntecipationClass
 import br.edu.utfpr.troubleshootingstandards.entity.*;
 import br.edu.utfpr.troubleshootingstandards.repository.ProposalAnticipationRepository;
 import br.edu.utfpr.troubleshootingstandards.service.mapper.AnticipationMapper;
+import br.edu.utfpr.troubleshootingstandards.service.mapper.ApprovalAnticipationMapper;
 import br.edu.utfpr.troubleshootingstandards.service.mapper.LessonMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +15,7 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import static org.mockito.Mockito.verify;
@@ -22,8 +24,8 @@ import static org.mockito.Mockito.verify;
 public class AnticipationServiceTest {
 
     private static final String REASON = "Gripe";
-    private static final Date NEXT_DATE = new Date(2019, 5, 14);
-    private static final Date DATE = new Date(2019, 5, 28);
+    private static final LocalDate NEXT_DATE = LocalDate.of(2019, 5, 14);
+    private static final LocalDate DATE = LocalDate.of(2019, 5, 28);
     private static final int NUMBER_CLASSES = 2;
     private static final String IN_PERSON = Modalitie.PRESENCIAL.name();
     public static final long CODE = 123456;
@@ -35,6 +37,7 @@ public class AnticipationServiceTest {
     private ProposalAnticipationRepository anticipationRepository;
 
     private AnticipationMapper anticipationMapper = Mappers.getMapper(AnticipationMapper.class);
+    private ApprovalAnticipationMapper approvalAnticipationMapper = Mappers.getMapper(ApprovalAnticipationMapper.class);
     private LessonMapper lessonMapper = Mappers.getMapper(LessonMapper.class);
 
     private ProposalAnticipationDTO proposalAnticipationDTO;
@@ -48,7 +51,7 @@ public class AnticipationServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        ast = new AnticipationServiceImpl(anticipationRepository, anticipationMapper);
+        ast = new AnticipationServiceImpl(anticipationRepository, anticipationMapper, approvalAnticipationMapper);
 
         anticipationDTO = AnticipationDTO
                 .builder()
@@ -108,7 +111,7 @@ public class AnticipationServiceTest {
 
     @Test(expected = DateAnticipationException.class)
     public void shouldNotIncludeAfterDate() throws Exception {
-        anticipationDTO.setNextDate(new Date(2019, 6, 5));
+        anticipationDTO.setNextDate(LocalDate.of(2019, 6, 5));
 
         anticipation.setNextDate(anticipationDTO.getNextDate());
 

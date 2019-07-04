@@ -2,14 +2,10 @@ package br.edu.utfpr.troubleshootingstandards.service.mapper;
 
 import br.edu.utfpr.troubleshootingstandards.dto.AttendanceDTO;
 import br.edu.utfpr.troubleshootingstandards.dto.AttendanceStudentDTO;
-import br.edu.utfpr.troubleshootingstandards.dto.AttendanceStudentDTO.AttendanceStudentDTOBuilder;
 import br.edu.utfpr.troubleshootingstandards.dto.StudentDTO;
-import br.edu.utfpr.troubleshootingstandards.dto.StudentDTO.StudentDTOBuilder;
 import br.edu.utfpr.troubleshootingstandards.entity.Attendance;
-import br.edu.utfpr.troubleshootingstandards.entity.Attendance.AttendanceBuilder;
 import br.edu.utfpr.troubleshootingstandards.entity.AttendanceStudent;
 import br.edu.utfpr.troubleshootingstandards.entity.Student;
-import br.edu.utfpr.troubleshootingstandards.entity.Student.StudentBuilder;
 import java.util.HashSet;
 import java.util.Set;
 import javax.annotation.Generated;
@@ -44,16 +40,16 @@ public class AttendanceStudentMapperImpl implements AttendanceStudentMapper {
             return null;
         }
 
-        AttendanceStudentDTOBuilder attendanceStudentDTO = AttendanceStudentDTO.builder();
+        AttendanceStudentDTO attendanceStudentDTO = new AttendanceStudentDTO();
 
         if ( attendanceStudent.getId() != null ) {
-            attendanceStudentDTO.id( attendanceStudent.getId() );
+            attendanceStudentDTO.setId( attendanceStudent.getId() );
         }
-        attendanceStudentDTO.attendance( attendanceSetToAttendanceDTOSet( attendanceStudent.getAttendance() ) );
-        attendanceStudentDTO.note( attendanceStudent.getNote() );
-        attendanceStudentDTO.createdAt( attendanceStudent.getCreatedAt() );
+        attendanceStudentDTO.setAttendance( attendanceSetToAttendanceDTOSet( attendanceStudent.getAttendance() ) );
+        attendanceStudentDTO.setNote( attendanceStudent.getNote() );
+        attendanceStudentDTO.setCreatedAt( attendanceStudent.getCreatedAt() );
 
-        return attendanceStudentDTO.build();
+        return attendanceStudentDTO;
     }
 
     protected Student studentDTOToStudent(StudentDTO studentDTO) {
@@ -61,11 +57,11 @@ public class AttendanceStudentMapperImpl implements AttendanceStudentMapper {
             return null;
         }
 
-        StudentBuilder student = Student.builder();
+        Student student = new Student();
 
-        student.name( studentDTO.getName() );
+        student.setName( studentDTO.getName() );
 
-        return student.build();
+        return student;
     }
 
     protected Attendance attendanceDTOToAttendance(AttendanceDTO attendanceDTO) {
@@ -73,13 +69,13 @@ public class AttendanceStudentMapperImpl implements AttendanceStudentMapper {
             return null;
         }
 
-        AttendanceBuilder attendance = Attendance.builder();
+        Attendance attendance = new Attendance();
 
-        attendance.id( attendanceDTO.getId() );
-        attendance.student( studentDTOToStudent( attendanceDTO.getStudent() ) );
-        attendance.presence( attendanceDTO.isPresence() );
+        attendance.setId( attendanceDTO.getId() );
+        attendance.setStudent( studentDTOToStudent( attendanceDTO.getStudent() ) );
+        attendance.setPresence( attendanceDTO.isPresence() );
 
-        return attendance.build();
+        return attendance;
     }
 
     protected Set<Attendance> attendanceDTOSetToAttendanceSet(Set<AttendanceDTO> set) {
@@ -100,11 +96,11 @@ public class AttendanceStudentMapperImpl implements AttendanceStudentMapper {
             return null;
         }
 
-        StudentDTOBuilder studentDTO = StudentDTO.builder();
+        StudentDTO studentDTO = new StudentDTO();
 
-        studentDTO.name( student.getName() );
+        studentDTO.setName( student.getName() );
 
-        return studentDTO.build();
+        return studentDTO;
     }
 
     protected AttendanceDTO attendanceToAttendanceDTO(Attendance attendance) {
