@@ -1,12 +1,16 @@
 package br.edu.utfpr.troubleshootingstandards.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -34,7 +38,6 @@ public class Lesson implements Serializable {
     @Column(name="number_classes")
     private int numberClasses;
 
-    @Temporal(TemporalType.DATE)
-    private Date date;
+    private LocalDate date;
 
 }

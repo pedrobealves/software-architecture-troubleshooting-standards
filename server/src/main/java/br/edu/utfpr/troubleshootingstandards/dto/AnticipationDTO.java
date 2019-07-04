@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -17,5 +17,5 @@ public class AnticipationDTO {
     private ReasonDTO reason;
     private String modalitie;
     private int numberClasses;
-    private Date nextDate;
+    private LocalDate nextDate;
 }

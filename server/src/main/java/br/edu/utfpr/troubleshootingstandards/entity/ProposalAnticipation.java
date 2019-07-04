@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 
 @Data
@@ -24,4 +25,7 @@ public class ProposalAnticipation implements Serializable {
 
     @OneToOne
     private Lesson lesson;
+
+    @OneToOne(mappedBy = "proposalAnticipation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private ApprovalAnticipation approvalAnticipation;
 }

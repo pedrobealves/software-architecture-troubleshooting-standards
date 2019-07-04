@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -26,7 +26,6 @@ public class Anticipation implements Serializable {
     private int numberClasses;
 
     @Column(name="next_date")
-    @Temporal(TemporalType.DATE)
-    private Date nextDate;
+    private LocalDate nextDate;
 
 }

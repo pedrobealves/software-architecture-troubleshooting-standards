@@ -17,5 +17,5 @@ public class Anticipation {
     private Reason reason;
     private String modalitie;
     private int numberClasses;
-    private Date nextDate;
+    private String nextDate;
 }

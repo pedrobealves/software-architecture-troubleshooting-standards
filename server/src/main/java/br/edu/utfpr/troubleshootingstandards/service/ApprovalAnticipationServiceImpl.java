@@ -1,6 +1,7 @@
 package br.edu.utfpr.troubleshootingstandards.service;
 
 import br.edu.utfpr.troubleshootingstandards.dto.ApprovalAnticipationDTO;
+import br.edu.utfpr.troubleshootingstandards.entity.ApprovalAnticipation;
 import br.edu.utfpr.troubleshootingstandards.exception.ConsentsAnticipationException;
 import br.edu.utfpr.troubleshootingstandards.repository.ApprovalAnticipationRepository;
 import br.edu.utfpr.troubleshootingstandards.repository.LessonRepository;
@@ -61,13 +62,8 @@ public class ApprovalAnticipationServiceImpl implements ApprovalAnticipationServ
     }
 
     @Override
-    public void approval(long id){
-        approvalAnticipationRepository.findById(id)
-                .map(record -> {
-                    record.setApproved(true);
-                    return approvalAnticipationRepository.save(record);
-                });
+    public List<ApprovalAnticipationDTO> getAll() {
+        return approvalAnticipationMapper.toApprovalAnticipationDTO(approvalAnticipationRepository.findAll());
     }
-
 
 }

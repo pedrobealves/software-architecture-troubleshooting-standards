@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -21,6 +22,6 @@ public class LessonDTO implements Serializable {
     private AttendanceStudentDTO attendanceStudent;
     private String content;
     private int numberClasses;
-    private Date date;
+    private LocalDate date;
 
 }

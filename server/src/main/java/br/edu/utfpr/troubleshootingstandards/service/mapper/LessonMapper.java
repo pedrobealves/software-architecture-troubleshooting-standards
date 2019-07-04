@@ -6,14 +6,11 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
+import java.util.List;
+
 @Mapper
 public interface LessonMapper {
-    @Mappings({
-            @Mapping(target = "classCourse", ignore = true),
-            @Mapping(target = "attendanceStudent", ignore = true)})
     Lesson toLesson(LessonDTO lessonDTO);
-    @Mappings({
-            @Mapping(target = "classCourse", ignore = true),
-            @Mapping(target = "attendanceStudent", ignore = true)})
     LessonDTO toLessonDTO(Lesson lesson);
+    List<LessonDTO> toLessonDTO(List<Lesson> lesson);
 }
