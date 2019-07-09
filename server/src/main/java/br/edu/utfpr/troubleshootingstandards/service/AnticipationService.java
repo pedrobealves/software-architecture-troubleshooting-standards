@@ -1,10 +1,9 @@
 package br.edu.utfpr.troubleshootingstandards.service;
 
-import br.edu.utfpr.troubleshootingstandards.dto.AnticipationDTO;
 import br.edu.utfpr.troubleshootingstandards.dto.ApprovalAnticipationDTO;
 import br.edu.utfpr.troubleshootingstandards.dto.ProposalAnticipationDTO;
-import br.edu.utfpr.troubleshootingstandards.entity.Modalitie;
 import br.edu.utfpr.troubleshootingstandards.exception.DateAnticipationException;
+import br.edu.utfpr.troubleshootingstandards.exception.EntityNotFoundException;
 import br.edu.utfpr.troubleshootingstandards.exception.ExceededAntecipationClassException;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +17,7 @@ public interface AnticipationService {
 
     List<ProposalAnticipationDTO> getAll();
 
-    Optional<ProposalAnticipationDTO> getById(Long id);
+    Optional<ProposalAnticipationDTO> getById(Long id) throws EntityNotFoundException;
 
     Optional<ApprovalAnticipationDTO> getByIdApproval(Long id);
 

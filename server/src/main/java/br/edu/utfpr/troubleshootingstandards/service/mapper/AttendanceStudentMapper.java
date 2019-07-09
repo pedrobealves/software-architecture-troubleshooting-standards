@@ -1,10 +1,8 @@
 package br.edu.utfpr.troubleshootingstandards.service.mapper;
 
 import br.edu.utfpr.troubleshootingstandards.dto.AttendanceStudentDTO;
-import br.edu.utfpr.troubleshootingstandards.entity.AttendanceStudent;
+import br.edu.utfpr.troubleshootingstandards.model.AttendanceStudent;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 
 @Mapper
 public interface AttendanceStudentMapper {

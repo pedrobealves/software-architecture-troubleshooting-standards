@@ -1,9 +1,8 @@
 package br.edu.utfpr.troubleshootingstandards.service.mapper;
 
 import br.edu.utfpr.troubleshootingstandards.dto.ApprovalAnticipationDTO;
-import br.edu.utfpr.troubleshootingstandards.entity.ApprovalAnticipation;
+import br.edu.utfpr.troubleshootingstandards.model.ApprovalAnticipation;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import java.util.List;
 

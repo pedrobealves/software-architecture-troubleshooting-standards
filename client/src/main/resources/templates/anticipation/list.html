@@ -106,7 +106,7 @@
 		                    <tr th:each="p : ${anticipation}">
 		                        <td th:text="${p.id}">2</td>
 		                        <td th:text="${p.anticipation.modalitie}">Presencial</td>
-								<td th:text="${p.anticipation.reason.description}">Viagem</td>
+								<td th:text="${p.anticipation.reason.reasonBy}">Viagem</td>
 								<td th:text="${p.anticipation.numberClasses}">1</td>
 								<td th:text="${p.anticipation.nextDate}">2017/08/14</td>
 								<td th:text="${p.lesson.content}">Programação</td>

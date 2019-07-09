@@ -1,7 +1,7 @@
 package br.edu.utfpr.troubleshootingstandards.service;
 
 import br.edu.utfpr.troubleshootingstandards.dto.*;
-import br.edu.utfpr.troubleshootingstandards.entity.*;
+import br.edu.utfpr.troubleshootingstandards.model.*;
 import br.edu.utfpr.troubleshootingstandards.repository.ApprovalAnticipationRepository;
 import br.edu.utfpr.troubleshootingstandards.repository.LessonRepository;
 import br.edu.utfpr.troubleshootingstandards.service.mapper.AnticipationMapper;
@@ -15,10 +15,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
-import java.util.Optional;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 public class ApprovalAticipationServiceTest {

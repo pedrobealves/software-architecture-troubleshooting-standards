@@ -1,7 +1,6 @@
 package br.edu.utfpr.troubleshootingstandards.service;
 
 import br.edu.utfpr.troubleshootingstandards.dto.ApprovalAnticipationDTO;
-import br.edu.utfpr.troubleshootingstandards.entity.ApprovalAnticipation;
 import br.edu.utfpr.troubleshootingstandards.exception.ConsentsAnticipationException;
 import br.edu.utfpr.troubleshootingstandards.repository.ApprovalAnticipationRepository;
 import br.edu.utfpr.troubleshootingstandards.repository.LessonRepository;
