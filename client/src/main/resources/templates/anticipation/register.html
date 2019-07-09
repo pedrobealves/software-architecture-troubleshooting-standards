@@ -25,14 +25,14 @@
 	        
 	        	<div th:replace="fragments/alert"></div>
 	        
-	            <form th:action="${proposalAnticipation.id == null} ? @{/antecipacao/salvar} : @{/antecipacao/salvar}"
+	            <form th:action="${proposalAnticipation.id < 1} ? @{/antecipacao/salvar} : @{/antecipacao/editar}"
 	                  th:object="${proposalAnticipation}" method="POST">
 
 
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label for="modalitie">UF</label>
-							<select id="modalitie" class="form-control" th:field="*{anticipation.modalitie}"
+							<select id="modalitie" class="form-control" th:field="*{anticipation.modalitie}" required
 									th:classappend="${#fields.hasErrors('anticipation.modalitie')} ? 'is-invalid'">
 								<option value="">Selecione...</option>
 								<option th:each="modalitie : ${modalities}" th:value="${modalitie}" th:text="${modalitie}"></option>
@@ -43,7 +43,7 @@
 						</div>
 						<div class="form-group col-md-4">
 							<label for="nextDate">Data de antecipação</label>
-							<input type="date" class="form-control" id="nextDate" th:field="*{anticipation.nextDate}"
+							<input type="date" class="form-control" id="nextDate" th:field="*{anticipation.nextDate}" required
 								   th:classappend="${#fields.hasErrors('anticipation.nextDate')} ? 'is-invalid'" />
 							<div class="invalid-feedback">
 								<span th:errors="*{anticipation.nextDate}"></span>
@@ -51,7 +51,7 @@
 						</div>
 						<div class="form-group col-md-2">
 							<label for="nome">Número de Aulas</label>
-							<input type="number" class="form-control" id="nome" placeholder="Nome Completo"
+							<input type="number" class="form-control" id="nome" placeholder="Nome Completo" required
 								   autofocus="autofocus" th:field="*{anticipation.numberClasses}"
 								   th:classappend="${#fields.hasErrors('anticipation.numberClasses')} ? 'is-invalid'" />
 							<div class="invalid-feedback">
@@ -62,10 +62,10 @@
 					<div class="form-row">
 							<div class="form-group col-md-6">
 								<label for="lesson">Cargo</label>
-								<select id="lesson" class="form-control" th:field="*{lesson}"
+								<select id="lesson" class="form-control" th:field="*{lesson}" required
 										th:classappend="${#fields.hasErrors('lesson')} ? 'is-invalid'">
 									<option value="">Selecione...</option>
-									<option th:each="l : ${lessons}" th:value="${l.id}" th:text="${l.content}"></option>
+									<option th:each="l : ${lessons}" th:value="${l.id}" th:text="|${l.date}/${l.classCourse.subject.name}|"></option>
 								</select>
 								<div class="invalid-feedback">
 									<span th:errors="*{lesson}"></span>
@@ -73,7 +73,7 @@
 							</div>
 						<div class="form-group col-md-6">
 							<label for="reason">UF</label>
-							<select id="reason" class="form-control" th:field="*{anticipation.reason.reasonBy}"
+							<select id="reason" class="form-control" th:field="*{anticipation.reason.reasonBy}" required
 									th:classappend="${#fields.hasErrors('anticipation.reason.reasonBy')} ? 'is-invalid'">
 								<option value="">Selecione...</option>
 								<option th:each="reason : ${reasons}" th:value="${reason}" th:text="${reason}"></option>
@@ -83,6 +83,8 @@
 							</div>
 						</div>
 					</div>
+					<input type="hidden" id="id" th:field="*{id}"/>
+					<input type="hidden" id="anticipation.id" th:field="*{anticipation.id}"/>
 					<button type="submit" class="btn btn-primary btn-sm">Salvar</button>
 	            </form>
 	        </div>

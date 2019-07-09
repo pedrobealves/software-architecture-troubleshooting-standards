@@ -1,12 +1,16 @@
 package br.edu.utfpr.client.controller;
 
+import br.edu.utfpr.client.util.RestUtil;
 import br.edu.utfpr.client.model.ApprovalAnticipation;
 import br.edu.utfpr.client.model.Lesson;
 import br.edu.utfpr.client.model.ProposalAnticipation;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -19,15 +23,14 @@ import javax.validation.Valid;
 @RequestMapping("/antecipacao")
 public class AnticipationController {
 
+    @Autowired
+    private RestUtil restUtil;
+
     @GetMapping("/listar")
     public String listar(ModelMap model) throws JsonSyntaxException, UnirestException {
         ProposalAnticipation proposalAnticipations[] = new Gson()
                 .fromJson(
-                        Unirest
-                                .get("http://localhost:8081/api/anticipations")
-                                .asJson()
-                                .getBody()
-                                .toString(),
+                        restUtil.doGet("anticipations"),
                         ProposalAnticipation[].class
                 );
         model.addAttribute("anticipation", proposalAnticipations);
@@ -41,18 +44,42 @@ public class AnticipationController {
 
     @PostMapping("/salvar")
     public String salvar(@Valid ProposalAnticipation proposalAnticipation, BindingResult result, RedirectAttributes attr) throws UnirestException {
+        return getString(proposalAnticipation, result, attr);
+    }
 
+    @GetMapping("/editar/{id}")
+    public String preEditar(@PathVariable("id") Long id, ModelMap model) throws UnirestException {
+        ProposalAnticipation proposalAnticipation = new Gson()
+                .fromJson(
+                        restUtil.doGetById("anticipations/{id}", id),
+                        ProposalAnticipation.class
+                );
+        model.addAttribute("proposalAnticipation",proposalAnticipation);
+        return "anticipation/register";
+    }
+
+    @PostMapping("/editar")
+    public String editar(@Valid ProposalAnticipation proposalAnticipation, BindingResult result, RedirectAttributes attr) throws UnirestException {
+        return getString(proposalAnticipation, result, attr);
+    }
+
+    private String getString(@Valid ProposalAnticipation proposalAnticipation, BindingResult result, RedirectAttributes attr) throws UnirestException {
         if (result.hasErrors()) {
             return "anticipation/register";
         }
 
-        Unirest.post("http://localhost:8081/api/anticipations")
-                .header("Content-type", "application/json")
-                .header("accept", "application/json")
-                .body(new Gson().toJson(proposalAnticipation, ProposalAnticipation.class))
-                .asJson();
+        HttpResponse<JsonNode> response = restUtil.doPost(new Gson().toJson(proposalAnticipation, ProposalAnticipation.class), "anticipations");
+
+        if ((response.getStatus() != 200 && response.getStatus() != 201)) {
+            result.rejectValue(
+                    response.getBody().getObject().getJSONObject("subError").getString("field"),
+                    "error.proposalAnticipation",
+                    response.getBody().getObject().getJSONObject("subError").getString("message"));
+            return "anticipation/register";
+        }
 
         attr.addFlashAttribute("success", "Proposta de antecipação inserida com sucesso.");
+
         return "redirect:/antecipacao/listar";
     }
 
@@ -61,23 +88,14 @@ public class AnticipationController {
 
         ApprovalAnticipation approvalAnticipations = new Gson()
                 .fromJson(
-                        Unirest
-                                .get("http://localhost:8081/api/anticipations/{id}/approvals")
-                                .routeParam("id", String.valueOf(id))
-                                .asJson()
-                                .getBody()
-                                .toString(),
+                        restUtil.doGetById("anticipations/{id}/approvals", id),
                         ApprovalAnticipation.class
                 );
 
         if(approvalAnticipations.getId() != 0){
             attr.addFlashAttribute("fail", "Antecipação não removida. Existe aprovação vinculada.");
         } else {
-            Unirest
-                    .delete("http://localhost:8081/api/anticipations/{id}")
-                    .routeParam("id", String.valueOf(id))
-                    .asJson();
-
+            restUtil.doDelete("anticipations/{id}", id);
             attr.addFlashAttribute("success", "Antecipação removida com sucesso.");
         }
         return "redirect:/antecipacao/listar";
@@ -87,11 +105,7 @@ public class AnticipationController {
     public Lesson[] getLessons() throws UnirestException {
         return new Gson()
                 .fromJson(
-                        Unirest
-                                .get("http://localhost:8081/api/lessons")
-                                .asJson()
-                                .getBody()
-                                .toString(),
+                        restUtil.doGet("lessons"),
                         Lesson[].class
                 );
     }
@@ -100,11 +114,7 @@ public class AnticipationController {
     public String[] getModalities() throws UnirestException {
         return new Gson()
                 .fromJson(
-                        Unirest
-                                .get("http://localhost:8081/api/anticipations/modalities")
-                                .asJson()
-                                .getBody()
-                                .toString(),
+                        restUtil.doGet("anticipations/modalities"),
                         String[].class
                 );
     }
@@ -113,11 +123,7 @@ public class AnticipationController {
     public String[] getReasons() throws UnirestException {
         return new Gson()
                 .fromJson(
-                        Unirest
-                                .get("http://localhost:8081/api/anticipations/reasons")
-                                .asJson()
-                                .getBody()
-                                .toString(),
+                        restUtil.doGet("anticipations/reasons"),
                         String[].class
                 );
     }

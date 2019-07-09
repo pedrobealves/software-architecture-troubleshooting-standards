@@ -3,7 +3,7 @@ package br.edu.utfpr.troubleshootingstandards.service;
 import br.edu.utfpr.troubleshootingstandards.dto.*;
 import br.edu.utfpr.troubleshootingstandards.exception.DateAnticipationException;
 import br.edu.utfpr.troubleshootingstandards.exception.ExceededAntecipationClassException;
-import br.edu.utfpr.troubleshootingstandards.entity.*;
+import br.edu.utfpr.troubleshootingstandards.model.*;
 import br.edu.utfpr.troubleshootingstandards.repository.ProposalAnticipationRepository;
 import br.edu.utfpr.troubleshootingstandards.service.mapper.AnticipationMapper;
 import br.edu.utfpr.troubleshootingstandards.service.mapper.ApprovalAnticipationMapper;
@@ -16,7 +16,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import static org.mockito.Mockito.verify;
 

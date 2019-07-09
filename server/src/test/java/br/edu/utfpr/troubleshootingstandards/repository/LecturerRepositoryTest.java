@@ -1,6 +1,6 @@
 package br.edu.utfpr.troubleshootingstandards.repository;
 
-import br.edu.utfpr.troubleshootingstandards.entity.Lecturer;
+import br.edu.utfpr.troubleshootingstandards.model.Lecturer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
