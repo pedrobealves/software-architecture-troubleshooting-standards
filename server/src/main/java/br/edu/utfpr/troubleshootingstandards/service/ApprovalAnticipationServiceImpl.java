@@ -2,6 +2,7 @@ package br.edu.utfpr.troubleshootingstandards.service;
 
 import br.edu.utfpr.troubleshootingstandards.dto.ApprovalAnticipationDTO;
 import br.edu.utfpr.troubleshootingstandards.exception.ConsentsAnticipationException;
+import br.edu.utfpr.troubleshootingstandards.model.ApprovalAnticipation;
 import br.edu.utfpr.troubleshootingstandards.repository.ApprovalAnticipationRepository;
 import br.edu.utfpr.troubleshootingstandards.repository.LessonRepository;
 import br.edu.utfpr.troubleshootingstandards.service.mapper.ApprovalAnticipationMapper;
@@ -34,7 +35,10 @@ public class ApprovalAnticipationServiceImpl implements ApprovalAnticipationServ
         double numberStudentsP = approvalAnticipationDTO.getProposalAnticipation().getLesson().getClassCourse().getStudents().size() * 0.75;
 
         if (numberConsents < numberStudentsP)
-            throw new ConsentsAnticipationException("Não possui uma lista de anuência com no mínimo 75%");
+            throw new ConsentsAnticipationException(
+                "Lista de anuência não atinge o mínimo de 75%",
+                "consents"
+        );
 
         long idLesson = approvalAnticipationDTO.getProposalAnticipation().getLesson().getId();
 
@@ -46,11 +50,13 @@ public class ApprovalAnticipationServiceImpl implements ApprovalAnticipationServ
                     return lessonRepository.save(record);
                 });
 
+        ApprovalAnticipation approvalAnticipation = approvalAnticipationMapper
+                .toApprovalAnticipation(approvalAnticipationDTO);
+
 
         approvalAnticipationRepository
                 .save(
-                        approvalAnticipationMapper
-                                .toApprovalAnticipation(approvalAnticipationDTO)
+                        approvalAnticipation
                 );
     }
 

@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class AnticipationDTO {
-    private long id;
+    private Long id;
     private ReasonDTO reason;
     private String modalitie;
     private int numberClasses;

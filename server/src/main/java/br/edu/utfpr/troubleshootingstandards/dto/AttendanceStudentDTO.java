@@ -13,7 +13,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 public class AttendanceStudentDTO {
-    private long id;
+    private Long id;
     private Set<AttendanceDTO> attendance;
     private String note;
     private Date createdAt;

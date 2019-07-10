@@ -21,11 +21,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 public class Student implements Serializable {
-
     @Id
     @GeneratedValue
-    private long id;
-
+    private Long id;
     private String name;
 
 }

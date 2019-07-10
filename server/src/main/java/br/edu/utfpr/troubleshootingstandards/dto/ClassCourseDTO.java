@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ClassCourseDTO {
     
-    private long code;
+    private Long id;
     private SubjectDTO subject;
     private LecturerDTO lecturer;
     private Set<StudentDTO> students;

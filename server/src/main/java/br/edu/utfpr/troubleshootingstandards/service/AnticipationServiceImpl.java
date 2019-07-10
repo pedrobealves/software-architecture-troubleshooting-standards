@@ -48,7 +48,7 @@ public class AnticipationServiceImpl implements AnticipationService {
 
         //Regra sobre data de antecipação de aula
         if(proposalAnticipationDTO.getAnticipation().getNextDate().isAfter(proposalAnticipationDTO.getLesson().getDate()))
-            throw new ExceededAntecipationClassException(
+            throw new DateAnticipationException(
                     "Data deve ser anterior à data e ao horário previsto no plano de ensino",
                     "anticipation.nextDate"
             );

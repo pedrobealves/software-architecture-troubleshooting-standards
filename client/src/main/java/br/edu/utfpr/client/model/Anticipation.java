@@ -13,7 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class Anticipation {
-    private long id;
+    private Long id;
     private Reason reason;
     private String modalitie;
     private int numberClasses;

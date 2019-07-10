@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ApprovalAnticipationDTO {
-    private long id;
+    private Long id;
     private ProposalAnticipationDTO proposalAnticipation;
     private AttendanceStudentDTO consents;
     private DepartmentLeaderDTO departmentLeader;

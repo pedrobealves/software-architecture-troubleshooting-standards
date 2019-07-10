@@ -1,35 +1,59 @@
 package br.edu.utfpr.troubleshootingstandards.service.mapper;
 
 import br.edu.utfpr.troubleshootingstandards.dto.AnticipationDTO;
+import br.edu.utfpr.troubleshootingstandards.dto.AnticipationDTO.AnticipationDTOBuilder;
 import br.edu.utfpr.troubleshootingstandards.dto.ApprovalAnticipationDTO;
+import br.edu.utfpr.troubleshootingstandards.dto.ApprovalAnticipationDTO.ApprovalAnticipationDTOBuilder;
 import br.edu.utfpr.troubleshootingstandards.dto.AttendanceDTO;
+import br.edu.utfpr.troubleshootingstandards.dto.AttendanceDTO.AttendanceDTOBuilder;
 import br.edu.utfpr.troubleshootingstandards.dto.AttendanceStudentDTO;
+import br.edu.utfpr.troubleshootingstandards.dto.AttendanceStudentDTO.AttendanceStudentDTOBuilder;
 import br.edu.utfpr.troubleshootingstandards.dto.ClassCourseDTO;
+import br.edu.utfpr.troubleshootingstandards.dto.ClassCourseDTO.ClassCourseDTOBuilder;
 import br.edu.utfpr.troubleshootingstandards.dto.CoordinatorCourseDTO;
+import br.edu.utfpr.troubleshootingstandards.dto.CoordinatorCourseDTO.CoordinatorCourseDTOBuilder;
 import br.edu.utfpr.troubleshootingstandards.dto.DepartmentDTO;
+import br.edu.utfpr.troubleshootingstandards.dto.DepartmentDTO.DepartmentDTOBuilder;
 import br.edu.utfpr.troubleshootingstandards.dto.DepartmentLeaderDTO;
+import br.edu.utfpr.troubleshootingstandards.dto.DepartmentLeaderDTO.DepartmentLeaderDTOBuilder;
 import br.edu.utfpr.troubleshootingstandards.dto.LecturerDTO;
+import br.edu.utfpr.troubleshootingstandards.dto.LecturerDTO.LecturerDTOBuilder;
 import br.edu.utfpr.troubleshootingstandards.dto.LessonDTO;
+import br.edu.utfpr.troubleshootingstandards.dto.LessonDTO.LessonDTOBuilder;
 import br.edu.utfpr.troubleshootingstandards.dto.ProposalAnticipationDTO;
+import br.edu.utfpr.troubleshootingstandards.dto.ProposalAnticipationDTO.ProposalAnticipationDTOBuilder;
 import br.edu.utfpr.troubleshootingstandards.dto.ReasonDTO;
+import br.edu.utfpr.troubleshootingstandards.dto.ReasonDTO.ReasonDTOBuilder;
 import br.edu.utfpr.troubleshootingstandards.dto.StudentDTO;
+import br.edu.utfpr.troubleshootingstandards.dto.StudentDTO.StudentDTOBuilder;
 import br.edu.utfpr.troubleshootingstandards.dto.SubjectDTO;
+import br.edu.utfpr.troubleshootingstandards.dto.SubjectDTO.SubjectDTOBuilder;
 import br.edu.utfpr.troubleshootingstandards.model.Anticipation;
+import br.edu.utfpr.troubleshootingstandards.model.Anticipation.AnticipationBuilder;
 import br.edu.utfpr.troubleshootingstandards.model.ApprovalAnticipation;
 import br.edu.utfpr.troubleshootingstandards.model.Attendance;
+import br.edu.utfpr.troubleshootingstandards.model.Attendance.AttendanceBuilder;
 import br.edu.utfpr.troubleshootingstandards.model.AttendanceStudent;
+import br.edu.utfpr.troubleshootingstandards.model.AttendanceStudent.AttendanceStudentBuilder;
 import br.edu.utfpr.troubleshootingstandards.model.ClassCourse;
+import br.edu.utfpr.troubleshootingstandards.model.ClassCourse.ClassCourseBuilder;
 import br.edu.utfpr.troubleshootingstandards.model.CoordinatorCourse;
 import br.edu.utfpr.troubleshootingstandards.model.Department;
 import br.edu.utfpr.troubleshootingstandards.model.DepartmentLeader;
 import br.edu.utfpr.troubleshootingstandards.model.Lecturer;
+import br.edu.utfpr.troubleshootingstandards.model.Lecturer.LecturerBuilder;
 import br.edu.utfpr.troubleshootingstandards.model.Lesson;
+import br.edu.utfpr.troubleshootingstandards.model.Lesson.LessonBuilder;
 import br.edu.utfpr.troubleshootingstandards.model.Modalitie;
 import br.edu.utfpr.troubleshootingstandards.model.ProposalAnticipation;
+import br.edu.utfpr.troubleshootingstandards.model.ProposalAnticipation.ProposalAnticipationBuilder;
 import br.edu.utfpr.troubleshootingstandards.model.Reason;
+import br.edu.utfpr.troubleshootingstandards.model.Reason.ReasonBuilder;
 import br.edu.utfpr.troubleshootingstandards.model.ReasonBy;
 import br.edu.utfpr.troubleshootingstandards.model.Student;
+import br.edu.utfpr.troubleshootingstandards.model.Student.StudentBuilder;
 import br.edu.utfpr.troubleshootingstandards.model.Subject;
+import br.edu.utfpr.troubleshootingstandards.model.Subject.SubjectBuilder;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -54,10 +78,7 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
 
         approvalAnticipation.setId( approvalAnticipationDTO.getId() );
         approvalAnticipation.setProposalAnticipation( proposalAnticipationDTOToProposalAnticipation( approvalAnticipationDTO.getProposalAnticipation() ) );
-        approvalAnticipation.setDepartmentLeader( departmentLeaderDTOToDepartmentLeader( approvalAnticipationDTO.getDepartmentLeader() ) );
-        approvalAnticipation.setCoordinatorCourse( coordinatorCourseDTOToCoordinatorCourse( approvalAnticipationDTO.getCoordinatorCourse() ) );
         approvalAnticipation.setConsents( attendanceStudentDTOToAttendanceStudent( approvalAnticipationDTO.getConsents() ) );
-        approvalAnticipation.setApproved( approvalAnticipationDTO.isApproved() );
 
         return approvalAnticipation;
     }
@@ -68,16 +89,16 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        ApprovalAnticipationDTO approvalAnticipationDTO = new ApprovalAnticipationDTO();
+        ApprovalAnticipationDTOBuilder approvalAnticipationDTO = ApprovalAnticipationDTO.builder();
 
-        approvalAnticipationDTO.setId( approvalAnticipation.getId() );
-        approvalAnticipationDTO.setProposalAnticipation( proposalAnticipationToProposalAnticipationDTO( approvalAnticipation.getProposalAnticipation() ) );
-        approvalAnticipationDTO.setConsents( attendanceStudentToAttendanceStudentDTO( approvalAnticipation.getConsents() ) );
-        approvalAnticipationDTO.setDepartmentLeader( departmentLeaderToDepartmentLeaderDTO( approvalAnticipation.getDepartmentLeader() ) );
-        approvalAnticipationDTO.setCoordinatorCourse( coordinatorCourseToCoordinatorCourseDTO( approvalAnticipation.getCoordinatorCourse() ) );
-        approvalAnticipationDTO.setApproved( approvalAnticipation.isApproved() );
+        approvalAnticipationDTO.id( approvalAnticipation.getId() );
+        approvalAnticipationDTO.proposalAnticipation( proposalAnticipationToProposalAnticipationDTO( approvalAnticipation.getProposalAnticipation() ) );
+        approvalAnticipationDTO.consents( attendanceStudentToAttendanceStudentDTO( approvalAnticipation.getConsents() ) );
+        approvalAnticipationDTO.departmentLeader( departmentLeaderToDepartmentLeaderDTO( approvalAnticipation.getDepartmentLeader() ) );
+        approvalAnticipationDTO.coordinatorCourse( coordinatorCourseToCoordinatorCourseDTO( approvalAnticipation.getCoordinatorCourse() ) );
+        approvalAnticipationDTO.approved( approvalAnticipation.isApproved() );
 
-        return approvalAnticipationDTO;
+        return approvalAnticipationDTO.build();
     }
 
     @Override
@@ -99,14 +120,14 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        Reason reason = new Reason();
+        ReasonBuilder reason = Reason.builder();
 
         if ( reasonDTO.getReasonBy() != null ) {
-            reason.setReasonBy( Enum.valueOf( ReasonBy.class, reasonDTO.getReasonBy() ) );
+            reason.reasonBy( Enum.valueOf( ReasonBy.class, reasonDTO.getReasonBy() ) );
         }
-        reason.setDescription( reasonDTO.getDescription() );
+        reason.description( reasonDTO.getDescription() );
 
-        return reason;
+        return reason.build();
     }
 
     protected Anticipation anticipationDTOToAnticipation(AnticipationDTO anticipationDTO) {
@@ -114,16 +135,16 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        Anticipation anticipation = new Anticipation();
+        AnticipationBuilder anticipation = Anticipation.builder();
 
-        anticipation.setReason( reasonDTOToReason( anticipationDTO.getReason() ) );
+        anticipation.reason( reasonDTOToReason( anticipationDTO.getReason() ) );
         if ( anticipationDTO.getModalitie() != null ) {
-            anticipation.setModalitie( Enum.valueOf( Modalitie.class, anticipationDTO.getModalitie() ) );
+            anticipation.modalitie( Enum.valueOf( Modalitie.class, anticipationDTO.getModalitie() ) );
         }
-        anticipation.setNumberClasses( anticipationDTO.getNumberClasses() );
-        anticipation.setNextDate( anticipationDTO.getNextDate() );
+        anticipation.numberClasses( anticipationDTO.getNumberClasses() );
+        anticipation.nextDate( anticipationDTO.getNextDate() );
 
-        return anticipation;
+        return anticipation.build();
     }
 
     protected Subject subjectDTOToSubject(SubjectDTO subjectDTO) {
@@ -131,11 +152,12 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        Subject subject = new Subject();
+        SubjectBuilder subject = Subject.builder();
 
-        subject.setName( subjectDTO.getName() );
+        subject.id( subjectDTO.getId() );
+        subject.name( subjectDTO.getName() );
 
-        return subject;
+        return subject.build();
     }
 
     protected Lecturer lecturerDTOToLecturer(LecturerDTO lecturerDTO) {
@@ -143,11 +165,12 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        Lecturer lecturer = new Lecturer();
+        LecturerBuilder lecturer = Lecturer.builder();
 
-        lecturer.setName( lecturerDTO.getName() );
+        lecturer.id( lecturerDTO.getId() );
+        lecturer.name( lecturerDTO.getName() );
 
-        return lecturer;
+        return lecturer.build();
     }
 
     protected Student studentDTOToStudent(StudentDTO studentDTO) {
@@ -155,11 +178,12 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        Student student = new Student();
+        StudentBuilder student = Student.builder();
 
-        student.setName( studentDTO.getName() );
+        student.id( studentDTO.getId() );
+        student.name( studentDTO.getName() );
 
-        return student;
+        return student.build();
     }
 
     protected Set<Student> studentDTOSetToStudentSet(Set<StudentDTO> set) {
@@ -180,13 +204,14 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        ClassCourse classCourse = new ClassCourse();
+        ClassCourseBuilder classCourse = ClassCourse.builder();
 
-        classCourse.setSubject( subjectDTOToSubject( classCourseDTO.getSubject() ) );
-        classCourse.setLecturer( lecturerDTOToLecturer( classCourseDTO.getLecturer() ) );
-        classCourse.setStudents( studentDTOSetToStudentSet( classCourseDTO.getStudents() ) );
+        classCourse.id( classCourseDTO.getId() );
+        classCourse.subject( subjectDTOToSubject( classCourseDTO.getSubject() ) );
+        classCourse.lecturer( lecturerDTOToLecturer( classCourseDTO.getLecturer() ) );
+        classCourse.students( studentDTOSetToStudentSet( classCourseDTO.getStudents() ) );
 
-        return classCourse;
+        return classCourse.build();
     }
 
     protected Attendance attendanceDTOToAttendance(AttendanceDTO attendanceDTO) {
@@ -194,13 +219,13 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        Attendance attendance = new Attendance();
+        AttendanceBuilder attendance = Attendance.builder();
 
-        attendance.setId( attendanceDTO.getId() );
-        attendance.setStudent( studentDTOToStudent( attendanceDTO.getStudent() ) );
-        attendance.setPresence( attendanceDTO.isPresence() );
+        attendance.id( attendanceDTO.getId() );
+        attendance.student( studentDTOToStudent( attendanceDTO.getStudent() ) );
+        attendance.presence( attendanceDTO.isPresence() );
 
-        return attendance;
+        return attendance.build();
     }
 
     protected Set<Attendance> attendanceDTOSetToAttendanceSet(Set<AttendanceDTO> set) {
@@ -221,14 +246,14 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        AttendanceStudent attendanceStudent = new AttendanceStudent();
+        AttendanceStudentBuilder attendanceStudent = AttendanceStudent.builder();
 
-        attendanceStudent.setId( attendanceStudentDTO.getId() );
-        attendanceStudent.setAttendance( attendanceDTOSetToAttendanceSet( attendanceStudentDTO.getAttendance() ) );
-        attendanceStudent.setNote( attendanceStudentDTO.getNote() );
-        attendanceStudent.setCreatedAt( attendanceStudentDTO.getCreatedAt() );
+        attendanceStudent.id( attendanceStudentDTO.getId() );
+        attendanceStudent.attendance( attendanceDTOSetToAttendanceSet( attendanceStudentDTO.getAttendance() ) );
+        attendanceStudent.note( attendanceStudentDTO.getNote() );
+        attendanceStudent.createdAt( attendanceStudentDTO.getCreatedAt() );
 
-        return attendanceStudent;
+        return attendanceStudent.build();
     }
 
     protected Lesson lessonDTOToLesson(LessonDTO lessonDTO) {
@@ -236,20 +261,20 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        Lesson lesson = new Lesson();
+        LessonBuilder lesson = Lesson.builder();
 
-        lesson.setId( lessonDTO.getId() );
-        lesson.setClassCourse( classCourseDTOToClassCourse( lessonDTO.getClassCourse() ) );
+        lesson.id( lessonDTO.getId() );
+        lesson.classCourse( classCourseDTOToClassCourse( lessonDTO.getClassCourse() ) );
         Set<String> set = lessonDTO.getType();
         if ( set != null ) {
-            lesson.setType( new HashSet<String>( set ) );
+            lesson.type( new HashSet<String>( set ) );
         }
-        lesson.setAttendanceStudent( attendanceStudentDTOToAttendanceStudent( lessonDTO.getAttendanceStudent() ) );
-        lesson.setContent( lessonDTO.getContent() );
-        lesson.setNumberClasses( lessonDTO.getNumberClasses() );
-        lesson.setDate( lessonDTO.getDate() );
+        lesson.attendanceStudent( attendanceStudentDTOToAttendanceStudent( lessonDTO.getAttendanceStudent() ) );
+        lesson.content( lessonDTO.getContent() );
+        lesson.numberClasses( lessonDTO.getNumberClasses() );
+        lesson.date( lessonDTO.getDate() );
 
-        return lesson;
+        return lesson.build();
     }
 
     protected ProposalAnticipation proposalAnticipationDTOToProposalAnticipation(ProposalAnticipationDTO proposalAnticipationDTO) {
@@ -257,50 +282,13 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        ProposalAnticipation proposalAnticipation = new ProposalAnticipation();
+        ProposalAnticipationBuilder proposalAnticipation = ProposalAnticipation.builder();
 
-        proposalAnticipation.setId( proposalAnticipationDTO.getId() );
-        proposalAnticipation.setAnticipation( anticipationDTOToAnticipation( proposalAnticipationDTO.getAnticipation() ) );
-        proposalAnticipation.setLesson( lessonDTOToLesson( proposalAnticipationDTO.getLesson() ) );
+        proposalAnticipation.id( proposalAnticipationDTO.getId() );
+        proposalAnticipation.anticipation( anticipationDTOToAnticipation( proposalAnticipationDTO.getAnticipation() ) );
+        proposalAnticipation.lesson( lessonDTOToLesson( proposalAnticipationDTO.getLesson() ) );
 
-        return proposalAnticipation;
-    }
-
-    protected Department departmentDTOToDepartment(DepartmentDTO departmentDTO) {
-        if ( departmentDTO == null ) {
-            return null;
-        }
-
-        Department department = new Department();
-
-        department.setName( departmentDTO.getName() );
-
-        return department;
-    }
-
-    protected DepartmentLeader departmentLeaderDTOToDepartmentLeader(DepartmentLeaderDTO departmentLeaderDTO) {
-        if ( departmentLeaderDTO == null ) {
-            return null;
-        }
-
-        DepartmentLeader departmentLeader = new DepartmentLeader();
-
-        departmentLeader.setName( departmentLeaderDTO.getName() );
-        departmentLeader.setDepartment( departmentDTOToDepartment( departmentLeaderDTO.getDepartment() ) );
-
-        return departmentLeader;
-    }
-
-    protected CoordinatorCourse coordinatorCourseDTOToCoordinatorCourse(CoordinatorCourseDTO coordinatorCourseDTO) {
-        if ( coordinatorCourseDTO == null ) {
-            return null;
-        }
-
-        CoordinatorCourse coordinatorCourse = new CoordinatorCourse();
-
-        coordinatorCourse.setName( coordinatorCourseDTO.getName() );
-
-        return coordinatorCourse;
+        return proposalAnticipation.build();
     }
 
     protected ReasonDTO reasonToReasonDTO(Reason reason) {
@@ -308,14 +296,14 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        ReasonDTO reasonDTO = new ReasonDTO();
+        ReasonDTOBuilder reasonDTO = ReasonDTO.builder();
 
         if ( reason.getReasonBy() != null ) {
-            reasonDTO.setReasonBy( reason.getReasonBy().name() );
+            reasonDTO.reasonBy( reason.getReasonBy().name() );
         }
-        reasonDTO.setDescription( reason.getDescription() );
+        reasonDTO.description( reason.getDescription() );
 
-        return reasonDTO;
+        return reasonDTO.build();
     }
 
     protected AnticipationDTO anticipationToAnticipationDTO(Anticipation anticipation) {
@@ -323,16 +311,16 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        AnticipationDTO anticipationDTO = new AnticipationDTO();
+        AnticipationDTOBuilder anticipationDTO = AnticipationDTO.builder();
 
-        anticipationDTO.setReason( reasonToReasonDTO( anticipation.getReason() ) );
+        anticipationDTO.reason( reasonToReasonDTO( anticipation.getReason() ) );
         if ( anticipation.getModalitie() != null ) {
-            anticipationDTO.setModalitie( anticipation.getModalitie().name() );
+            anticipationDTO.modalitie( anticipation.getModalitie().name() );
         }
-        anticipationDTO.setNumberClasses( anticipation.getNumberClasses() );
-        anticipationDTO.setNextDate( anticipation.getNextDate() );
+        anticipationDTO.numberClasses( anticipation.getNumberClasses() );
+        anticipationDTO.nextDate( anticipation.getNextDate() );
 
-        return anticipationDTO;
+        return anticipationDTO.build();
     }
 
     protected SubjectDTO subjectToSubjectDTO(Subject subject) {
@@ -340,11 +328,12 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        SubjectDTO subjectDTO = new SubjectDTO();
+        SubjectDTOBuilder subjectDTO = SubjectDTO.builder();
 
-        subjectDTO.setName( subject.getName() );
+        subjectDTO.id( subject.getId() );
+        subjectDTO.name( subject.getName() );
 
-        return subjectDTO;
+        return subjectDTO.build();
     }
 
     protected LecturerDTO lecturerToLecturerDTO(Lecturer lecturer) {
@@ -352,11 +341,12 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        LecturerDTO lecturerDTO = new LecturerDTO();
+        LecturerDTOBuilder lecturerDTO = LecturerDTO.builder();
 
-        lecturerDTO.setName( lecturer.getName() );
+        lecturerDTO.id( lecturer.getId() );
+        lecturerDTO.name( lecturer.getName() );
 
-        return lecturerDTO;
+        return lecturerDTO.build();
     }
 
     protected StudentDTO studentToStudentDTO(Student student) {
@@ -364,11 +354,12 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        StudentDTO studentDTO = new StudentDTO();
+        StudentDTOBuilder studentDTO = StudentDTO.builder();
 
-        studentDTO.setName( student.getName() );
+        studentDTO.name( student.getName() );
+        studentDTO.id( student.getId() );
 
-        return studentDTO;
+        return studentDTO.build();
     }
 
     protected Set<StudentDTO> studentSetToStudentDTOSet(Set<Student> set) {
@@ -389,13 +380,14 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        ClassCourseDTO classCourseDTO = new ClassCourseDTO();
+        ClassCourseDTOBuilder classCourseDTO = ClassCourseDTO.builder();
 
-        classCourseDTO.setSubject( subjectToSubjectDTO( classCourse.getSubject() ) );
-        classCourseDTO.setLecturer( lecturerToLecturerDTO( classCourse.getLecturer() ) );
-        classCourseDTO.setStudents( studentSetToStudentDTOSet( classCourse.getStudents() ) );
+        classCourseDTO.id( classCourse.getId() );
+        classCourseDTO.subject( subjectToSubjectDTO( classCourse.getSubject() ) );
+        classCourseDTO.lecturer( lecturerToLecturerDTO( classCourse.getLecturer() ) );
+        classCourseDTO.students( studentSetToStudentDTOSet( classCourse.getStudents() ) );
 
-        return classCourseDTO;
+        return classCourseDTO.build();
     }
 
     protected AttendanceDTO attendanceToAttendanceDTO(Attendance attendance) {
@@ -403,15 +395,13 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        AttendanceDTO attendanceDTO = new AttendanceDTO();
+        AttendanceDTOBuilder attendanceDTO = AttendanceDTO.builder();
 
-        if ( attendance.getId() != null ) {
-            attendanceDTO.setId( attendance.getId() );
-        }
-        attendanceDTO.setStudent( studentToStudentDTO( attendance.getStudent() ) );
-        attendanceDTO.setPresence( attendance.isPresence() );
+        attendanceDTO.id( attendance.getId() );
+        attendanceDTO.student( studentToStudentDTO( attendance.getStudent() ) );
+        attendanceDTO.presence( attendance.isPresence() );
 
-        return attendanceDTO;
+        return attendanceDTO.build();
     }
 
     protected Set<AttendanceDTO> attendanceSetToAttendanceDTOSet(Set<Attendance> set) {
@@ -432,16 +422,14 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        AttendanceStudentDTO attendanceStudentDTO = new AttendanceStudentDTO();
+        AttendanceStudentDTOBuilder attendanceStudentDTO = AttendanceStudentDTO.builder();
 
-        if ( attendanceStudent.getId() != null ) {
-            attendanceStudentDTO.setId( attendanceStudent.getId() );
-        }
-        attendanceStudentDTO.setAttendance( attendanceSetToAttendanceDTOSet( attendanceStudent.getAttendance() ) );
-        attendanceStudentDTO.setNote( attendanceStudent.getNote() );
-        attendanceStudentDTO.setCreatedAt( attendanceStudent.getCreatedAt() );
+        attendanceStudentDTO.id( attendanceStudent.getId() );
+        attendanceStudentDTO.attendance( attendanceSetToAttendanceDTOSet( attendanceStudent.getAttendance() ) );
+        attendanceStudentDTO.note( attendanceStudent.getNote() );
+        attendanceStudentDTO.createdAt( attendanceStudent.getCreatedAt() );
 
-        return attendanceStudentDTO;
+        return attendanceStudentDTO.build();
     }
 
     protected LessonDTO lessonToLessonDTO(Lesson lesson) {
@@ -449,20 +437,20 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        LessonDTO lessonDTO = new LessonDTO();
+        LessonDTOBuilder lessonDTO = LessonDTO.builder();
 
-        lessonDTO.setId( lesson.getId() );
-        lessonDTO.setClassCourse( classCourseToClassCourseDTO( lesson.getClassCourse() ) );
+        lessonDTO.id( lesson.getId() );
+        lessonDTO.classCourse( classCourseToClassCourseDTO( lesson.getClassCourse() ) );
         Set<String> set = lesson.getType();
         if ( set != null ) {
-            lessonDTO.setType( new HashSet<String>( set ) );
+            lessonDTO.type( new HashSet<String>( set ) );
         }
-        lessonDTO.setAttendanceStudent( attendanceStudentToAttendanceStudentDTO( lesson.getAttendanceStudent() ) );
-        lessonDTO.setContent( lesson.getContent() );
-        lessonDTO.setNumberClasses( lesson.getNumberClasses() );
-        lessonDTO.setDate( lesson.getDate() );
+        lessonDTO.attendanceStudent( attendanceStudentToAttendanceStudentDTO( lesson.getAttendanceStudent() ) );
+        lessonDTO.content( lesson.getContent() );
+        lessonDTO.numberClasses( lesson.getNumberClasses() );
+        lessonDTO.date( lesson.getDate() );
 
-        return lessonDTO;
+        return lessonDTO.build();
     }
 
     protected ProposalAnticipationDTO proposalAnticipationToProposalAnticipationDTO(ProposalAnticipation proposalAnticipation) {
@@ -470,15 +458,13 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        ProposalAnticipationDTO proposalAnticipationDTO = new ProposalAnticipationDTO();
+        ProposalAnticipationDTOBuilder proposalAnticipationDTO = ProposalAnticipationDTO.builder();
 
-        if ( proposalAnticipation.getId() != null ) {
-            proposalAnticipationDTO.setId( proposalAnticipation.getId() );
-        }
-        proposalAnticipationDTO.setAnticipation( anticipationToAnticipationDTO( proposalAnticipation.getAnticipation() ) );
-        proposalAnticipationDTO.setLesson( lessonToLessonDTO( proposalAnticipation.getLesson() ) );
+        proposalAnticipationDTO.id( proposalAnticipation.getId() );
+        proposalAnticipationDTO.anticipation( anticipationToAnticipationDTO( proposalAnticipation.getAnticipation() ) );
+        proposalAnticipationDTO.lesson( lessonToLessonDTO( proposalAnticipation.getLesson() ) );
 
-        return proposalAnticipationDTO;
+        return proposalAnticipationDTO.build();
     }
 
     protected DepartmentDTO departmentToDepartmentDTO(Department department) {
@@ -486,11 +472,12 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        DepartmentDTO departmentDTO = new DepartmentDTO();
+        DepartmentDTOBuilder departmentDTO = DepartmentDTO.builder();
 
-        departmentDTO.setName( department.getName() );
+        departmentDTO.id( department.getId() );
+        departmentDTO.name( department.getName() );
 
-        return departmentDTO;
+        return departmentDTO.build();
     }
 
     protected DepartmentLeaderDTO departmentLeaderToDepartmentLeaderDTO(DepartmentLeader departmentLeader) {
@@ -498,12 +485,13 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        DepartmentLeaderDTO departmentLeaderDTO = new DepartmentLeaderDTO();
+        DepartmentLeaderDTOBuilder departmentLeaderDTO = DepartmentLeaderDTO.builder();
 
-        departmentLeaderDTO.setName( departmentLeader.getName() );
-        departmentLeaderDTO.setDepartment( departmentToDepartmentDTO( departmentLeader.getDepartment() ) );
+        departmentLeaderDTO.id( departmentLeader.getId() );
+        departmentLeaderDTO.name( departmentLeader.getName() );
+        departmentLeaderDTO.department( departmentToDepartmentDTO( departmentLeader.getDepartment() ) );
 
-        return departmentLeaderDTO;
+        return departmentLeaderDTO.build();
     }
 
     protected CoordinatorCourseDTO coordinatorCourseToCoordinatorCourseDTO(CoordinatorCourse coordinatorCourse) {
@@ -511,10 +499,11 @@ public class ApprovalAnticipationMapperImpl implements ApprovalAnticipationMappe
             return null;
         }
 
-        CoordinatorCourseDTO coordinatorCourseDTO = new CoordinatorCourseDTO();
+        CoordinatorCourseDTOBuilder coordinatorCourseDTO = CoordinatorCourseDTO.builder();
 
-        coordinatorCourseDTO.setName( coordinatorCourse.getName() );
+        coordinatorCourseDTO.id( coordinatorCourse.getId() );
+        coordinatorCourseDTO.name( coordinatorCourse.getName() );
 
-        return coordinatorCourseDTO;
+        return coordinatorCourseDTO.build();
     }
 }

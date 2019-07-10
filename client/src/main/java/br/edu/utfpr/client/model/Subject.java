@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Subject {
     
-    private long code;
+    private Long id;
     private String name;
 }

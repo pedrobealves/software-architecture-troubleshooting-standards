@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Attendance {
-    private long id;
+    private Long id;
     private Student student;
     private boolean presence;
 }

@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class AttendanceDTO {
-    private long id;
+    private Long id;
     private StudentDTO student;
     private boolean presence;
 }

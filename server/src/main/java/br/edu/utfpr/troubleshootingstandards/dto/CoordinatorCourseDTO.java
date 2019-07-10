@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class CoordinatorCourseDTO {
-    private long code;
+    private Long id;
     private String name;
 }

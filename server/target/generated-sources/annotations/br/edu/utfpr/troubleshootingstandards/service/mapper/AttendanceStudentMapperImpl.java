@@ -6,7 +6,9 @@ import br.edu.utfpr.troubleshootingstandards.dto.StudentDTO;
 import br.edu.utfpr.troubleshootingstandards.model.Attendance;
 import br.edu.utfpr.troubleshootingstandards.model.AttendanceStudent;
 import br.edu.utfpr.troubleshootingstandards.model.Student;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
@@ -42,14 +44,26 @@ public class AttendanceStudentMapperImpl implements AttendanceStudentMapper {
 
         AttendanceStudentDTO attendanceStudentDTO = new AttendanceStudentDTO();
 
-        if ( attendanceStudent.getId() != null ) {
-            attendanceStudentDTO.setId( attendanceStudent.getId() );
-        }
+        attendanceStudentDTO.setId( attendanceStudent.getId() );
         attendanceStudentDTO.setAttendance( attendanceSetToAttendanceDTOSet( attendanceStudent.getAttendance() ) );
         attendanceStudentDTO.setNote( attendanceStudent.getNote() );
         attendanceStudentDTO.setCreatedAt( attendanceStudent.getCreatedAt() );
 
         return attendanceStudentDTO;
+    }
+
+    @Override
+    public List<AttendanceStudentDTO> toAttendanceStudentDTO(List<AttendanceStudent> attendanceStudents) {
+        if ( attendanceStudents == null ) {
+            return null;
+        }
+
+        List<AttendanceStudentDTO> list = new ArrayList<AttendanceStudentDTO>( attendanceStudents.size() );
+        for ( AttendanceStudent attendanceStudent : attendanceStudents ) {
+            list.add( toAttendanceStudentDTO( attendanceStudent ) );
+        }
+
+        return list;
     }
 
     protected Student studentDTOToStudent(StudentDTO studentDTO) {
@@ -59,6 +73,7 @@ public class AttendanceStudentMapperImpl implements AttendanceStudentMapper {
 
         Student student = new Student();
 
+        student.setId( studentDTO.getId() );
         student.setName( studentDTO.getName() );
 
         return student;
@@ -99,6 +114,7 @@ public class AttendanceStudentMapperImpl implements AttendanceStudentMapper {
         StudentDTO studentDTO = new StudentDTO();
 
         studentDTO.setName( student.getName() );
+        studentDTO.setId( student.getId() );
 
         return studentDTO;
     }
@@ -110,9 +126,7 @@ public class AttendanceStudentMapperImpl implements AttendanceStudentMapper {
 
         AttendanceDTO attendanceDTO = new AttendanceDTO();
 
-        if ( attendance.getId() != null ) {
-            attendanceDTO.setId( attendance.getId() );
-        }
+        attendanceDTO.setId( attendance.getId() );
         attendanceDTO.setStudent( studentToStudentDTO( attendance.getStudent() ) );
         attendanceDTO.setPresence( attendance.isPresence() );
 
