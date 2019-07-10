@@ -26,6 +26,7 @@ public class ApprovalAnticipationServiceImpl implements ApprovalAnticipationServ
     private ApprovalAnticipationMapper approvalAnticipationMapper;
 
     @Override
+    // create new approvalAntecipation
     public void include(ApprovalAnticipationDTO approvalAnticipationDTO) throws ConsentsAnticipationException {
 
         int numberConsents = approvalAnticipationDTO.getConsents().getAttendance().size();
@@ -54,6 +55,7 @@ public class ApprovalAnticipationServiceImpl implements ApprovalAnticipationServ
     }
 
     @Override
+    // get specific approvalAntecipation
     public Optional<ApprovalAnticipationDTO> getById(Long id) {
         return approvalAnticipationRepository
                 .findById(id)
@@ -61,6 +63,7 @@ public class ApprovalAnticipationServiceImpl implements ApprovalAnticipationServ
     }
 
     @Override
+    // list of all approvalAntecipation
     public List<ApprovalAnticipationDTO> getAll() {
         return approvalAnticipationMapper.toApprovalAnticipationDTO(approvalAnticipationRepository.findAll());
     }

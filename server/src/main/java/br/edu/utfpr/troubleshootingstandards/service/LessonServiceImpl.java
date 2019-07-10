@@ -21,6 +21,7 @@ public class LessonServiceImpl implements LessonService {
     private LessonMapper lessonMapper;
 
     @Override
+    // get specific lesson by id
     public Optional<LessonDTO> getById(Long id) {
         return lessonRepository
                 .findById(id)
@@ -28,6 +29,7 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
+    // list of all lessons
     public List<LessonDTO> getAll() {
         return lessonMapper.toLessonDTO(lessonRepository.findAll());
     }
