@@ -65,6 +65,28 @@
 		});
 	</script>
 
+	<script type="text/javascript">
+
+		$(document).ready(function(){
+			$(' .nBtn, .table .eBtn').on('click', function(event){
+				event.preventDefault();
+				var href = $(this).attr('href');
+				var text = $(this).text();
+				if(text=='Edit') {
+
+					$.get(href, function (proposalAnticipation, status) {
+						$('.myForm #id').val(proposalAnticipation.id);
+					});
+
+					$('.myForm #exampleModal').modal();
+				}else{
+					$('.myForm #id').val('');
+					$('.myForm #exampleModal').modal();
+				}
+			});
+		});
+	</script>
+
 
 </body>
 </html>

@@ -1,6 +1,7 @@
 package br.edu.utfpr.troubleshootingstandards.controller;
 
 import br.edu.utfpr.troubleshootingstandards.dto.LessonDTO;
+import br.edu.utfpr.troubleshootingstandards.exception.EntityNotFoundException;
 import br.edu.utfpr.troubleshootingstandards.service.LessonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class LessonController {
     }
 
     @GetMapping ("/lessons/{id}")
-    public ResponseEntity<LessonDTO> getById(@PathVariable Long id) {
+    public ResponseEntity<LessonDTO> getById(@PathVariable Long id) throws EntityNotFoundException {
         Optional<LessonDTO> lesson = lessonService.getById(id);
         return ResponseEntity.of(lesson);
     }

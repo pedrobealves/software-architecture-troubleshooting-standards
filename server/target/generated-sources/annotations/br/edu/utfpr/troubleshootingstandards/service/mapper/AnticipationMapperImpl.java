@@ -44,9 +44,7 @@ public class AnticipationMapperImpl implements AnticipationMapper {
 
         ProposalAnticipationDTO proposalAnticipationDTO = new ProposalAnticipationDTO();
 
-        if ( proposalAnticipation.getId() != null ) {
-            proposalAnticipationDTO.setId( proposalAnticipation.getId() );
-        }
+        proposalAnticipationDTO.setId( proposalAnticipation.getId() );
         proposalAnticipationDTO.setAnticipation( anticipationToAnticipationDTO( proposalAnticipation.getAnticipation() ) );
         proposalAnticipationDTO.setLesson( lessonToLessonDTO( proposalAnticipation.getLesson() ) );
 
@@ -139,6 +137,7 @@ public class AnticipationMapperImpl implements AnticipationMapper {
 
         SubjectDTO subjectDTO = new SubjectDTO();
 
+        subjectDTO.setId( subject.getId() );
         subjectDTO.setName( subject.getName() );
 
         return subjectDTO;
@@ -151,6 +150,7 @@ public class AnticipationMapperImpl implements AnticipationMapper {
 
         LecturerDTO lecturerDTO = new LecturerDTO();
 
+        lecturerDTO.setId( lecturer.getId() );
         lecturerDTO.setName( lecturer.getName() );
 
         return lecturerDTO;
@@ -164,6 +164,7 @@ public class AnticipationMapperImpl implements AnticipationMapper {
         StudentDTO studentDTO = new StudentDTO();
 
         studentDTO.setName( student.getName() );
+        studentDTO.setId( student.getId() );
 
         return studentDTO;
     }
@@ -188,6 +189,7 @@ public class AnticipationMapperImpl implements AnticipationMapper {
 
         ClassCourseDTO classCourseDTO = new ClassCourseDTO();
 
+        classCourseDTO.setId( classCourse.getId() );
         classCourseDTO.setSubject( subjectToSubjectDTO( classCourse.getSubject() ) );
         classCourseDTO.setLecturer( lecturerToLecturerDTO( classCourse.getLecturer() ) );
         classCourseDTO.setStudents( studentSetToStudentDTOSet( classCourse.getStudents() ) );
@@ -202,9 +204,7 @@ public class AnticipationMapperImpl implements AnticipationMapper {
 
         AttendanceDTO attendanceDTO = new AttendanceDTO();
 
-        if ( attendance.getId() != null ) {
-            attendanceDTO.setId( attendance.getId() );
-        }
+        attendanceDTO.setId( attendance.getId() );
         attendanceDTO.setStudent( studentToStudentDTO( attendance.getStudent() ) );
         attendanceDTO.setPresence( attendance.isPresence() );
 
@@ -231,9 +231,7 @@ public class AnticipationMapperImpl implements AnticipationMapper {
 
         AttendanceStudentDTO attendanceStudentDTO = new AttendanceStudentDTO();
 
-        if ( attendanceStudent.getId() != null ) {
-            attendanceStudentDTO.setId( attendanceStudent.getId() );
-        }
+        attendanceStudentDTO.setId( attendanceStudent.getId() );
         attendanceStudentDTO.setAttendance( attendanceSetToAttendanceDTOSet( attendanceStudent.getAttendance() ) );
         attendanceStudentDTO.setNote( attendanceStudent.getNote() );
         attendanceStudentDTO.setCreatedAt( attendanceStudent.getCreatedAt() );
@@ -269,6 +267,7 @@ public class AnticipationMapperImpl implements AnticipationMapper {
 
         Subject subject = new Subject();
 
+        subject.setId( subjectDTO.getId() );
         subject.setName( subjectDTO.getName() );
 
         return subject;
@@ -281,6 +280,7 @@ public class AnticipationMapperImpl implements AnticipationMapper {
 
         Lecturer lecturer = new Lecturer();
 
+        lecturer.setId( lecturerDTO.getId() );
         lecturer.setName( lecturerDTO.getName() );
 
         return lecturer;
@@ -293,6 +293,7 @@ public class AnticipationMapperImpl implements AnticipationMapper {
 
         Student student = new Student();
 
+        student.setId( studentDTO.getId() );
         student.setName( studentDTO.getName() );
 
         return student;
@@ -318,6 +319,7 @@ public class AnticipationMapperImpl implements AnticipationMapper {
 
         ClassCourse classCourse = new ClassCourse();
 
+        classCourse.setId( classCourseDTO.getId() );
         classCourse.setSubject( subjectDTOToSubject( classCourseDTO.getSubject() ) );
         classCourse.setLecturer( lecturerDTOToLecturer( classCourseDTO.getLecturer() ) );
         classCourse.setStudents( studentDTOSetToStudentSet( classCourseDTO.getStudents() ) );

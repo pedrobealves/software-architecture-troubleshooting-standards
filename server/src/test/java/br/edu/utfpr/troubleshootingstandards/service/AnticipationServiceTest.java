@@ -54,7 +54,7 @@ public class AnticipationServiceTest {
 
         anticipationDTO = AnticipationDTO
                 .builder()
-                .id(0)
+                .id(0L)
                 .reason(ReasonDTO
                         .builder()
                         .reasonBy(ReasonBy.PREVISTO.name())

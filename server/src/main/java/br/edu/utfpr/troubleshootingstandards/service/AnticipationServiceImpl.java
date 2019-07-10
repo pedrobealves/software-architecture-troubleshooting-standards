@@ -34,6 +34,7 @@ public class AnticipationServiceImpl implements AnticipationService {
      * @param proposalAnticipationDTO
      * @throws ExceededAntecipationClassException
      * @throws DateAnticipationException
+     * function to create new antecipation on system, with rules and exceptions
      */
     @Override
     public void include(ProposalAnticipationDTO proposalAnticipationDTO) throws ExceededAntecipationClassException, DateAnticipationException {
@@ -47,7 +48,7 @@ public class AnticipationServiceImpl implements AnticipationService {
 
         //Regra sobre data de antecipação de aula
         if(proposalAnticipationDTO.getAnticipation().getNextDate().isAfter(proposalAnticipationDTO.getLesson().getDate()))
-            throw new ExceededAntecipationClassException(
+            throw new DateAnticipationException(
                     "Data deve ser anterior à data e ao horário previsto no plano de ensino",
                     "anticipation.nextDate"
             );
@@ -61,17 +62,20 @@ public class AnticipationServiceImpl implements AnticipationService {
     }
 
     @Override
+    // delete specific antecipation
     public void delete(Long id) {
         anticipationRepository
                 .deleteById(id);
     }
 
     @Override
+    // returns list of all antecipations
     public List<ProposalAnticipationDTO> getAll() {
         return anticipationMapper.toProposalAnticipationDTO(anticipationRepository.findAll());
     }
 
     @Override
+    // return specific antecipation or exception if id wrong
     public Optional<ProposalAnticipationDTO> getById(Long id) throws EntityNotFoundException {
         return Optional.ofNullable(anticipationRepository
                 .findById(id)
@@ -80,6 +84,7 @@ public class AnticipationServiceImpl implements AnticipationService {
     }
 
     @Override
+    // return antecipation by approvalId
     public Optional<ApprovalAnticipationDTO> getByIdApproval(Long id) {
         return anticipationRepository
                 .findById(id)

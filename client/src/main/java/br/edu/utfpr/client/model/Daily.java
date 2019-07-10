@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Daily {
-    private long id;
+    private Long id;
     private Lesson lesson;
     private String note;
 }

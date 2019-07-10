@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ProposalAnticipationDTO {
-    private long id;
+    private Long id;
     private AnticipationDTO anticipation;
     private LessonDTO lesson;
 }

@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder
 public class ClassCourse {
     
-    private long code;
+    private Long id;
     private Subject subject;
     private Lecturer lecturer;
     private Set<Student> students;

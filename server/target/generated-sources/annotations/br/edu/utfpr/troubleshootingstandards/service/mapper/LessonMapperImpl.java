@@ -93,6 +93,7 @@ public class LessonMapperImpl implements LessonMapper {
 
         Subject subject = new Subject();
 
+        subject.setId( subjectDTO.getId() );
         subject.setName( subjectDTO.getName() );
 
         return subject;
@@ -105,6 +106,7 @@ public class LessonMapperImpl implements LessonMapper {
 
         Lecturer lecturer = new Lecturer();
 
+        lecturer.setId( lecturerDTO.getId() );
         lecturer.setName( lecturerDTO.getName() );
 
         return lecturer;
@@ -117,6 +119,7 @@ public class LessonMapperImpl implements LessonMapper {
 
         Student student = new Student();
 
+        student.setId( studentDTO.getId() );
         student.setName( studentDTO.getName() );
 
         return student;
@@ -142,6 +145,7 @@ public class LessonMapperImpl implements LessonMapper {
 
         ClassCourse classCourse = new ClassCourse();
 
+        classCourse.setId( classCourseDTO.getId() );
         classCourse.setSubject( subjectDTOToSubject( classCourseDTO.getSubject() ) );
         classCourse.setLecturer( lecturerDTOToLecturer( classCourseDTO.getLecturer() ) );
         classCourse.setStudents( studentDTOSetToStudentSet( classCourseDTO.getStudents() ) );
@@ -198,6 +202,7 @@ public class LessonMapperImpl implements LessonMapper {
 
         SubjectDTO subjectDTO = new SubjectDTO();
 
+        subjectDTO.setId( subject.getId() );
         subjectDTO.setName( subject.getName() );
 
         return subjectDTO;
@@ -210,6 +215,7 @@ public class LessonMapperImpl implements LessonMapper {
 
         LecturerDTO lecturerDTO = new LecturerDTO();
 
+        lecturerDTO.setId( lecturer.getId() );
         lecturerDTO.setName( lecturer.getName() );
 
         return lecturerDTO;
@@ -223,6 +229,7 @@ public class LessonMapperImpl implements LessonMapper {
         StudentDTO studentDTO = new StudentDTO();
 
         studentDTO.setName( student.getName() );
+        studentDTO.setId( student.getId() );
 
         return studentDTO;
     }
@@ -247,6 +254,7 @@ public class LessonMapperImpl implements LessonMapper {
 
         ClassCourseDTO classCourseDTO = new ClassCourseDTO();
 
+        classCourseDTO.setId( classCourse.getId() );
         classCourseDTO.setSubject( subjectToSubjectDTO( classCourse.getSubject() ) );
         classCourseDTO.setLecturer( lecturerToLecturerDTO( classCourse.getLecturer() ) );
         classCourseDTO.setStudents( studentSetToStudentDTOSet( classCourse.getStudents() ) );
@@ -261,9 +269,7 @@ public class LessonMapperImpl implements LessonMapper {
 
         AttendanceDTO attendanceDTO = new AttendanceDTO();
 
-        if ( attendance.getId() != null ) {
-            attendanceDTO.setId( attendance.getId() );
-        }
+        attendanceDTO.setId( attendance.getId() );
         attendanceDTO.setStudent( studentToStudentDTO( attendance.getStudent() ) );
         attendanceDTO.setPresence( attendance.isPresence() );
 
@@ -290,9 +296,7 @@ public class LessonMapperImpl implements LessonMapper {
 
         AttendanceStudentDTO attendanceStudentDTO = new AttendanceStudentDTO();
 
-        if ( attendanceStudent.getId() != null ) {
-            attendanceStudentDTO.setId( attendanceStudent.getId() );
-        }
+        attendanceStudentDTO.setId( attendanceStudent.getId() );
         attendanceStudentDTO.setAttendance( attendanceSetToAttendanceDTOSet( attendanceStudent.getAttendance() ) );
         attendanceStudentDTO.setNote( attendanceStudent.getNote() );
         attendanceStudentDTO.setCreatedAt( attendanceStudent.getCreatedAt() );

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data
@@ -16,8 +17,9 @@ import java.io.Serializable;
 public class ApprovalAnticipation implements Serializable {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
 
+    @NotNull
     @OneToOne
     private ProposalAnticipation proposalAnticipation;
 
@@ -27,7 +29,8 @@ public class ApprovalAnticipation implements Serializable {
     @ManyToOne
     private CoordinatorCourse coordinatorCourse;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @NotNull
+    @OneToOne
     private AttendanceStudent consents;
 
     private boolean approved;

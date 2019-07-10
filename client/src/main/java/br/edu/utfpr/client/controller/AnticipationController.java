@@ -28,7 +28,7 @@ public class AnticipationController {
 
     @GetMapping("/listar")
     public String listar(ModelMap model) throws JsonSyntaxException, UnirestException {
-        ProposalAnticipation proposalAnticipations[] = new Gson()
+        ProposalAnticipation[] proposalAnticipations = new Gson()
                 .fromJson(
                         restUtil.doGet("anticipations"),
                         ProposalAnticipation[].class
@@ -92,7 +92,7 @@ public class AnticipationController {
                         ApprovalAnticipation.class
                 );
 
-        if(approvalAnticipations.getId() != 0){
+        if(approvalAnticipations.getId() != null){
             attr.addFlashAttribute("fail", "Antecipação não removida. Existe aprovação vinculada.");
         } else {
             restUtil.doDelete("anticipations/{id}", id);

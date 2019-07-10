@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Student {
     private String name;
-    private long code;
+    private Long id;
 }

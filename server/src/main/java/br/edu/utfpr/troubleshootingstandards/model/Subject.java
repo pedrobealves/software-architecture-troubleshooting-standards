@@ -16,7 +16,6 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Subject implements Serializable {
     @Id @GeneratedValue
-    private long id;
-    
+    private Long id;
     private String name;
 }

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class DepartmentLeaderDTO {
-    private long code;
+    private Long id;
     private String name;
     private DepartmentDTO department;
 }

@@ -1,5 +1,6 @@
 package br.edu.utfpr.troubleshootingstandards.exception.handler;
 
+import br.edu.utfpr.troubleshootingstandards.exception.ConsentsAnticipationException;
 import br.edu.utfpr.troubleshootingstandards.exception.DateAnticipationException;
 import br.edu.utfpr.troubleshootingstandards.exception.EntityNotFoundException;
 import br.edu.utfpr.troubleshootingstandards.exception.ExceededAntecipationClassException;
@@ -42,7 +43,15 @@ public class RestResponseEntityExceptionHandler
     }
 
     @ExceptionHandler(DateAnticipationException.class)
-    protected ResponseEntity<Object> handleEntityDate(ExceededAntecipationClassException ex) {
+    protected ResponseEntity<Object> handleEntityDate(DateAnticipationException ex) {
+        ApiError apiError = new ApiError(BAD_REQUEST);
+        apiError.setMessage("Validation error");
+        apiError.addValidationErrors(ex.getMessage(),ex.getFieldName());
+        return buildResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(ConsentsAnticipationException.class)
+    protected ResponseEntity<Object> handleConsents(ConsentsAnticipationException ex) {
         ApiError apiError = new ApiError(BAD_REQUEST);
         apiError.setMessage("Validation error");
         apiError.addValidationErrors(ex.getMessage(),ex.getFieldName());

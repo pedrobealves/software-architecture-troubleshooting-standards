@@ -13,5 +13,5 @@ import lombok.Setter;
 @Builder
 public class StudentDTO {
     private String name;
-    private long code;
+    private Long id;
 }

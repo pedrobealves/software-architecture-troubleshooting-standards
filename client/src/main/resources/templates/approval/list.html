@@ -99,28 +99,16 @@
 	                        <th th:text="#{table.anticipation.col.lesson}">Conteudo</th>
 	                        <th th:text="#{table.anticipation.col.lecturer}">Professor</th>
 	                        <th th:text="#{table.anticipation.col.subject}">Disciplina</th>
-	                        <th th:text="#{table.anticipation.col.acao}">Ação</th>
 	                    </tr>
 	                    </thead>
 	                    <tbody>
-		                    <tr th:each="p : ${anticipation}">
-		                        <td th:text="${p.id}">2</td>
-		                        <td th:text="${p.anticipation.modalitie}">Presencial</td>
-								<td th:text="${p.anticipation.reason.reasonBy}">Viagem</td>
-								<td th:text="${p.anticipation.numberClasses}">1</td>
-								<td th:text="${p.anticipation.nextDate}">2017/08/14</td>
-								<td th:text="${p.lesson.content}">Programação</td>
-								<td th:text="${p.lesson.classCourse.lecturer.name}">Engenharia</td>
-								<td th:text="${p.lesson.classCourse.subject.name}">Joe Doe</td>
-								<td colspan="2">
-		                            <a class="btn btn-info btn-sm" th:href="@{/antecipacao/editar/{id} (id=${p.id}) }" role="button">
-		                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
-		                            </a>
-		                            <button th:id="${#strings.concat('btn_antecipacao/excluir/', p.id) }" type="button" class="btn btn-danger btn-sm"
-		                                    data-toggle="modal" data-target="#myModal">
-		                                <span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
-		                            </button>
-		                        </td>
+		                    <tr th:each="a : ${approval}">
+		                        <td th:text="${a.id}">2</td>
+								<td th:text="${a.consents.id}">Presencial</td>
+								<td th:text="${a.consents.note}">Presencial</td>
+								<td th:text="${a.proposalAnticipation.anticipation.modalitie}">Presencial</td>
+								<td th:text="${a.proposalAnticipation.anticipation.nextDate}">2017/08/14</td>
+								<td th:text="${a.proposalAnticipation.lesson.content}">Programação</td>
 		                    </tr>
 	                    </tbody>
 	                </table>
