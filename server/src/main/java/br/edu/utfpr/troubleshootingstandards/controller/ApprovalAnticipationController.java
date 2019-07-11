@@ -23,17 +23,20 @@ public class ApprovalAnticipationController {
 
 
     @GetMapping("/approvals")
+    // returns list of all approvals
     public ResponseEntity<List<ApprovalAnticipationDTO>> getAll() {
         return ResponseEntity.ok(approvalAnticipationService.getAll());
     }
 
     @PostMapping("/approvals")
+    // creates and saves a new approval
     public ResponseEntity<ApprovalAnticipationDTO> save(@Valid @RequestBody ApprovalAnticipationDTO approvalAnticipationDTO) throws ConsentsAnticipationException {
         approvalAnticipationService.include(approvalAnticipationDTO);
         return ResponseEntity.status(201).body(approvalAnticipationDTO);
     }
 
     @GetMapping ("/approvals/{id}")
+    // get a specific approval by id
     public ResponseEntity<ApprovalAnticipationDTO> getById(@PathVariable Long id) {
         Optional<ApprovalAnticipationDTO> approvalAnticipationDTO = approvalAnticipationService.getById(id);
         return ResponseEntity.of(approvalAnticipationDTO);
