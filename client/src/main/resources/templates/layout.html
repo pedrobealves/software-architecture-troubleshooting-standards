@@ -72,7 +72,7 @@
 				event.preventDefault();
 				var href = $(this).attr('href');
 				var text = $(this).text();
-				if(text=='Edit') {
+				if(text=='Submeter') {
 
 					$.get(href, function (proposalAnticipation, status) {
 						$('.myForm #id').val(proposalAnticipation.id);
