@@ -24,29 +24,34 @@ public class AnticipationController {
     private AnticipationService anticipationService;
 
     @GetMapping("/anticipations")
+    // returns list of all antitipations
     public ResponseEntity<List<ProposalAnticipationDTO>> getAll() {
         return ResponseEntity.ok(anticipationService.getAll());
     }
 
     @PostMapping("/anticipations")
+    // create and save a new anticipation
     public ResponseEntity<ProposalAnticipationDTO> save(@Valid @RequestBody ProposalAnticipationDTO proposalAnticipationDTO) throws ExceededAntecipationClassException, DateAnticipationException {
             anticipationService.include(proposalAnticipationDTO);
             return ResponseEntity.status(201).body(proposalAnticipationDTO);
     }
 
     @GetMapping ("/anticipations/{id}")
+    // get a specific anticipation element by id
     public ResponseEntity<ProposalAnticipationDTO> getById(@PathVariable Long id) throws EntityNotFoundException {
         Optional<ProposalAnticipationDTO> clienteEncontrado = anticipationService.getById(id);
         return ResponseEntity.of(clienteEncontrado);
     }
 
     @DeleteMapping ("/anticipations/{id}")
+    // delete a specific anticipation by id
     public ResponseEntity excluir (@PathVariable long id) {
             anticipationService.delete(id);
             return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/anticipations/{id}")
+    // update a specific anticipation by id
     public ResponseEntity<Object> updateStudent(@RequestBody ProposalAnticipationDTO proposalAnticipationDTO, @PathVariable long id) throws ExceededAntecipationClassException, DateAnticipationException, EntityNotFoundException {
 
         Optional<ProposalAnticipationDTO> proposalAnticipation = anticipationService.getById(id);
@@ -62,17 +67,20 @@ public class AnticipationController {
     }
 
     @GetMapping ("/anticipations/{id}/approvals")
+    // returns list of approvals of a specific anticipation
     public ResponseEntity<ApprovalAnticipationDTO> getByAprroval(@PathVariable Long id) {
         Optional<ApprovalAnticipationDTO> approvalAnticipationDTO = anticipationService.getByIdApproval(id);
         return ResponseEntity.of(approvalAnticipationDTO);
     }
 
     @GetMapping("/anticipations/modalities")
+    // returns list of anticipation's modalities
     public ResponseEntity<Modalitie[]> getModalities() {
         return ResponseEntity.of(Optional.of(Modalitie.values()));
     }
 
     @GetMapping("/anticipations/reasons")
+    // returns list of anticipation's reasons
     public ResponseEntity<ReasonBy[]> getReasons() {
         return ResponseEntity.of(Optional.of(ReasonBy.values()));
     }
