@@ -21,11 +21,13 @@ public class LessonController {
     private LessonService lessonService;
 
     @GetMapping("/lessons")
+    // returns list of all lessons
     public ResponseEntity<List<LessonDTO>> getAll() {
         return ResponseEntity.ok(lessonService.getAll());
     }
 
     @GetMapping ("/lessons/{id}")
+    // get a specific lesson by id
     public ResponseEntity<LessonDTO> getById(@PathVariable Long id) throws EntityNotFoundException {
         Optional<LessonDTO> lesson = lessonService.getById(id);
         return ResponseEntity.of(lesson);
