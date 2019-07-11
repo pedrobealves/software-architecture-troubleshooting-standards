@@ -7,13 +7,13 @@ Development of the architectural structures for norms for Anticipation, Substitu
 
 > src/test/java/br/edu/utfpr/troubleshootingstandards/repository
 
-###### Testes de unitários
+###### Testes unitários
 
 > src/test/java/br/edu/utfpr/troubleshootingstandards/service
 
 ## Descrição do sistema
 
-![Camadas do projeto](https://1.bp.blogspot.com/-o_SovdBOa5k/XObZriqxCII/AAAAAAAADik/CFZoaLrx6pookfJpoQ2smaycvHwM1_dsACLcBGAs/s1600/Class%2BDiagram0.png)
+![Camadas do projeto](https://raw.githubusercontent.com/trecky/software-architecture-troubleshooting-standards/develop/docs/pkg.png)
 
 
 * **DTO** - transferir vários elementos de dados.
@@ -24,6 +24,6 @@ Development of the architectural structures for norms for Anticipation, Substitu
 
 #### Diagramas de atividade
 
-![Proposta de antecipação](https://2.bp.blogspot.com/-CvQzYrlavlg/XObZrvLX-YI/AAAAAAAADis/rQIhUB1kJaA3VCUtCMUf1yUv_sTznDq2ACLcBGAs/s1600/Proposta%2Bde%2BAntecipa%25C3%25A7%25C3%25A3o.png)
+![Proposta de antecipação](https://raw.githubusercontent.com/trecky/software-architecture-troubleshooting-standards/develop/docs/Proposta%20de%20Antecipa%C3%A7%C3%A3o.png)
 
-![Aprovação de antecipação](https://2.bp.blogspot.com/-cM4pGcxmdhY/XObZrobDP9I/AAAAAAAADio/aZ4Yqi3oMrskJ22iSwadkuymn72q-nBoACLcBGAs/s1600/Aprova%25C3%25A7%25C3%25A3o%2Bde%2BProposta%2Bde%2BAntecipa%25C3%25A7%25C3%25A3o.pngg)
+![Aprovação de antecipação](https://raw.githubusercontent.com/trecky/software-architecture-troubleshooting-standards/develop/docs/Aprova%C3%A7%C3%A3o%20de%20Proposta%20de%20Antecipa%C3%A7%C3%A3o.png)
