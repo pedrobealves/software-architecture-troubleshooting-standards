@@ -8,16 +8,16 @@
 	            <nav class="navbar navbar-expand-md navbar-top bg-light">
 	                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 	                    <ul class="navbar-nav">
-	                        <li class="nav-item active">
-	                            <i class="oi oi-caret-right"></i>
-	                            <span>Cadastrar Funcionários</span>
-	                        </li>
+							<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Cadastrar antecipação</li>	                        </li>
 	                    </ul>
 	                </div>
-	                <a class="btn btn-primary btn-md" th:href="@{/funcionarios/listar}" role="button">
-	                    <span class="oi oi-spreadsheet" title="Cadastro" aria-hidden="true"></span>
-	                    <span>Listar Funcionários</span>
-	                </a>
+	                <a th:href="@{/antecipacao/listar}" role="button">
+						<button type="button" class="btn btn-outline-primary">
+							<span class="oi oi-spreadsheet" title="Cadastro" aria-hidden="true"></span>
+							<span class="ml-1">Listar Antecipações</span>
+						</button>
+					</a>
 	            </nav>
 	        </div>
 	
@@ -31,7 +31,7 @@
 
 					<div class="form-row">
 						<div class="form-group col-md-6">
-							<label for="modalitie">UF</label>
+							<label for="modalitie">Modalidade</label>
 							<select id="modalitie" class="form-control" th:field="*{anticipation.modalitie}" required
 									th:classappend="${#fields.hasErrors('anticipation.modalitie')} ? 'is-invalid'">
 								<option value="">Selecione...</option>
@@ -61,7 +61,7 @@
 					</div>
 					<div class="form-row">
 							<div class="form-group col-md-6">
-								<label for="lesson">Cargo</label>
+								<label for="lesson">Aula</label>
 								<select id="lesson" class="form-control" th:field="*{lesson}" required
 										th:classappend="${#fields.hasErrors('lesson')} ? 'is-invalid'">
 									<option value="">Selecione...</option>
@@ -72,7 +72,7 @@
 								</div>
 							</div>
 						<div class="form-group col-md-6">
-							<label for="reason">UF</label>
+							<label for="reason">Motivo</label>
 							<select id="reason" class="form-control" th:field="*{anticipation.reason.reasonBy}" required
 									th:classappend="${#fields.hasErrors('anticipation.reason.reasonBy')} ? 'is-invalid'">
 								<option value="">Selecione...</option>
@@ -85,7 +85,7 @@
 					</div>
 					<input type="hidden" id="id" th:field="*{id}"/>
 					<input type="hidden" id="anticipation.id" th:field="*{anticipation.id}"/>
-					<button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+					<button type="submit" class="btn btn-primary">Salvar</button>
 	            </form>
 	        </div>
 	    </section>
