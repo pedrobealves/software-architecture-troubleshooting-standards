@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head><meta charset="UTF-8"/></head>
+<body>
+
+	    <section class="layout-content" layout:fragment="corpo">
+	        <nav class="navbar navbar-expand-md bg-light">
+				<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+					<ul class="navbar-nav">
+						<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Lista de Aulas</li>
+					</ul>
+				</div>
+	        </nav>
+
+	        <div class="container">
+	            <div class="table-responsive">
+
+	            	<div th:replace="fragments/alert"></div>
+
+	                <table class="table table-hover">
+	                    <thead>
+	                    <tr>
+	                        <th>#</th>
+							<th th:text="#{table.anticipation.col.numberClasses}">Aulas</th>
+	                        <th th:text="#{table.anticipation.col.date}">Data</th>
+	                        <th th:text="#{table.anticipation.col.lesson}">Conteudo</th>
+	                        <th th:text="#{table.anticipation.col.lecturer}">Professor</th>
+	                        <th th:text="#{table.anticipation.col.subject}">Disciplina</th>
+	                    </tr>
+	                    </thead>
+	                    <tbody>
+		                    <tr th:each="l : ${lesson}">
+		                        <td th:text="${l.id}">2</td>
+								<td th:text="${l.numberClasses}">1</td>
+								<td th:text="${l.date}">2017/08/14</td>
+								<td th:text="${l.content}">Programação</td>
+								<td th:text="${l.classCourse.lecturer.name}">Engenharia</td>
+								<td th:text="${l.classCourse.subject.name}">Joe Doe</td>
+		                    </tr>
+	                    </tbody>
+	                </table>
+	            </div>
+	        </div>
+
+	        <div th:replace="fragments/modal :: modal"></div>
+
+	    </section>
+</body>
+</html>		
