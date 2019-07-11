@@ -6,85 +6,22 @@
 <body>
 
 	    <section class="layout-content" layout:fragment="corpo">
-	        <nav class="navbar navbar-expand-md bg-light">
-	            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-	                <ul class="navbar-nav mr-auto">
-	                    <li class="nav-item active">
-	                        <i class="oi oi-caret-right"></i>
-	                        <span>Lista de Antecipação de Aulas</span>
-	                    </li>
-	                </ul>
-	                <a class="btn btn-primary btn-md" th:href="@{/antecipacao/cadastrar}" role="button">
-	                    <span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span>
-	                    <span>Cadastrar Antecipação</span>
-	                </a>
-	            </div>
-	        </nav>
+			<nav class="navbar navbar-expand-md bg-light">
+				<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+					<ul class="navbar-nav">
+						<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Cadastro de aprovação de antecipação</li>	                        </li>
+					</ul>
+				</div>
+				<a th:href="@{/antecipacao/cadastrar}" role="button">
+					<button type="button" class="btn btn-outline-primary">
+						<span class="oi oi-spreadsheet" title="Cadastro" aria-hidden="true"></span>
+						<span class="ml-1">Lista de Aprovações</span>
+					</button>
+				</a>
+			</nav>
 
 	        <div class="container">
-
-	            <p>
-	                <i class="oi oi-magnifying-glass"></i><span></span>
-	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNome"
-	                        aria-controls="collapseNome">Disciplinas
-	                </button>
-	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseCargo"
-	                        aria-controls="collapseCargo">Aulas
-	                </button>
-	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseData"
-	                        aria-controls="collapseData">Data
-	                </button>
-	            </p>
-	            <div class="row">
-	                <div class="col">
-	                    <div class="collapse" id="collapseNome">
-
-	                        <nav class="navbar navbar-light bg-light">
-	                            <form class="form-inline" method="GET" th:action="@{/atecipacao/buscar/disciplina}">
-	                                <input class="form-control mr-sm-2" type="search" placeholder="nome" aria-label="Search"
-	                                       th:name="nome" />
-	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
-	                            </form>
-	                        </nav>
-
-	                    </div>
-	                </div>
-	            </div>
-				<div class="row">
-	                <div class="col">
-	                    <div class="collapse" id="collapseCargo">
-
-	                        <nav class="navbar navbar-light bg-light">
-	                            <form class="form-inline" method="GET" th:action="@{/atencipacao/buscar/aula}">
-	                                <select class="form-control mr-sm-2" th:name="id" aria-label="Search">
-	                                    <option value="">Aula</option>
-	                                    <option th:each="c : ${cargos}" th:value="${c.id}" th:text="${c.nome}">Auxiliar Contábil</option>
-	                                </select>
-	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
-	                            </form>
-	                        </nav>
-
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="row">
-	                <div class="col">
-	                    <div class="collapse" id="collapseData">
-
-	                        <nav class="navbar navbar-light bg-light">
-	                            <form class="form-inline" method="GET" th:action="@{/antecipacao/buscar/data}">
-	                                <input class="form-control mr-sm-2" type="date" aria-label="Search"
-	                                       th:name="entrada" />
-	                                <input class="form-control mr-sm-2" type="date" aria-label="Search"
-	                                       th:name="saida" />
-	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
-	                            </form>
-	                        </nav>
-
-	                    </div>
-	                </div>
-	            </div>
-
 
 	            <div class="table-responsive">
 
@@ -101,7 +38,7 @@
 	                        <th th:text="#{table.anticipation.col.lesson}">Conteudo</th>
 	                        <th th:text="#{table.anticipation.col.lecturer}">Professor</th>
 	                        <th th:text="#{table.anticipation.col.subject}">Disciplina</th>
-	                        <th th:text="#{table.anticipation.col.acao}">Ação</th>
+	                        <th th:text="#{table.anticipation.col.acao}">Lista de Anuência</th>
 	                    </tr>
 	                    </thead>
 	                    <tbody>
@@ -114,7 +51,7 @@
 								<td th:text="${p.lesson.content}">Programação</td>
 								<td th:text="${p.lesson.classCourse.lecturer.name}">Engenharia</td>
 								<td th:text="${p.lesson.classCourse.subject.name}">Joe Doe</td>
-								<td> <a th:href="@{/aprovacao/cadastrar/{id} (id=${p.id}) }" class="btn btn-primary eBtn">Edit</a></td>
+								<td> <a th:href="@{/aprovacao/cadastrar/{id} (id=${p.id}) }" class="btn btn-primary eBtn">Submeter</a></td>
 							</tr>
 	                    </tbody>
 	                </table>
@@ -126,17 +63,17 @@
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">Update or create</h5>
+										<h5 class="modal-title" id="exampleModalLabel">Entregar lista de anuência</h5>
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
 									<div class="modal-body">
 										<div class="form-group">
-											<label for="consents">Cargo</label>
+											<label for="consents">Listas</label>
 											<select id="consents" class="form-control" th:field="*{consents}" required
 													th:classappend="${#fields.hasErrors('consents')} ? 'is-invalid'">
-												<option value="">Selecione...</option>
+												<option value="">Selecione a lista de anuência...</option>
 												<option th:each="a : ${attendances}" th:value="${a.id}" th:text="${a.id}"></option>
 											</select>
 											<div class="invalid-feedback">
