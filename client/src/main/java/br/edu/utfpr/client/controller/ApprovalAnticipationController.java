@@ -49,6 +49,15 @@ public class ApprovalAnticipationController {
 
     @PostMapping("/salvar")
     public String salvar(@Valid ApprovalAnticipation approvalAnticipation, BindingResult result, RedirectAttributes attr) throws UnirestException {
+        ApprovalAnticipation approvalAnticipations = new Gson()
+                .fromJson(
+                        restUtil.doGetById("anticipations/{id}/approvals", approvalAnticipation.getProposalAnticipation().getId()),
+                        ApprovalAnticipation.class
+                );
+        if(approvalAnticipations.getId() != null){
+            attr.addFlashAttribute("fail", "Já foi submetido uma lista");
+            return "redirect:/aprovacao/cadastrar";
+        }
         return getString(approvalAnticipation, result, attr);
     }
 
