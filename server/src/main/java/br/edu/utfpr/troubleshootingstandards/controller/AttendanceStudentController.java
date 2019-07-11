@@ -21,11 +21,13 @@ public class AttendanceStudentController {
     private AttendanceStudentService attendanceStudentService;
 
     @GetMapping("/attendances")
+    // returns list of all attendances
     public ResponseEntity<List<AttendanceStudentDTO>> getAll() {
         return ResponseEntity.ok(attendanceStudentService.getAll());
     }
 
     @GetMapping ("/attendances/{id}")
+    // get a specific attendance by id
     public ResponseEntity<AttendanceStudentDTO> getById(@PathVariable Long id) throws EntityNotFoundException {
         Optional<AttendanceStudentDTO> attendanceStudent = attendanceStudentService.getById(id);
         return ResponseEntity.of(attendanceStudent);
